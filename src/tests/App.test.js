@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import {Provider} from "react-redux"  //The <Provider /> makes the Redux store available to any nested components that have been wrapped in the connect() function.
-import App from './components/App.js';
+import App from './components/App';
 import store from "./store/store"
 
 it('renders without crashing', () => {
