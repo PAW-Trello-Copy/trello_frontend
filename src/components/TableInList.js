@@ -1,6 +1,6 @@
 import React from 'react';
 
-const TableList = ({title,cards}) =>{
+const TableInList = ({title,cards}) =>{
     return(
     <div style={styles.container}>
         <h3>{title}</h3>        
@@ -20,4 +20,4 @@ const styles={
 
 
 
-export default TableList;
+export default TableInList;

@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import TableList from "./TableList"
+import TableInList from "./TableInList"
 import {connect} from "react-redux"
 import MenuTable from "./MenuTable"
 import '../style/App.css';
@@ -12,7 +12,7 @@ render(){
         
 <MenuTable />
       <div style ={styles.listTableStyle}>        
-        {lists.map(list =><TableList key={lists.id} title={list.title}/>)}
+        {lists.map(list =><TableInList key={lists.id} title={list.title}/>)}
         </div>  
        
       
