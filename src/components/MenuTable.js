@@ -5,16 +5,14 @@ import Drawer from '@material-ui/core/Drawer';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
-import List from '@material-ui/core/List';
+import ListTable from "./ListTable"
 
 import Divider from '@material-ui/core/Divider';
 import IconButton from '@material-ui/core/IconButton';
 import MenuIcon from '@material-ui/icons/Menu';
 import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
 import ChevronRightIcon from '@material-ui/icons/ChevronRight';
-import ListItem from '@material-ui/core/ListItem';
 
-import ListItemText from '@material-ui/core/ListItemText';
 
 
 const drawerWidth = 240;
@@ -75,6 +73,7 @@ const useStyles = makeStyles(theme => ({
   },
 }));
 
+
 const MenuTbale= ()=> {
   const classes = useStyles();
   const theme = useTheme();
@@ -87,7 +86,10 @@ const MenuTbale= ()=> {
   const handleDrawerClose = () => {
     setOpen(false);
   };
-
+  const posts = [
+    {id: 1, title: 'Table №1',},
+    {id: 2, title: 'Table №2',}
+  ];
   return (
     <div className={classes.root}>
       <CssBaseline />
@@ -125,23 +127,8 @@ const MenuTbale= ()=> {
           </IconButton>
         </div>
         <Divider />
-        <List>
-          {['Table1', 'Table2', 'Table3', 'Table4'].map((text, index) => (
-            <ListItem button key={text}>
-             
-              <ListItemText primary={text} />
-            </ListItem>
-          ))}
-        </List>
-        <Divider />
-        <List>
-          {['Table1', 'Table2', 'Table3', 'Table4'].map((text, index) => (
-            <ListItem button key={text}>
-             
-              <ListItemText primary={text} />
-            </ListItem>
-          ))}
-        </List>
+        <ListTable posts={posts} />
+        
       </Drawer>
       <main
         className={clsx(classes.content, {
