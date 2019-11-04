@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import TableInList from "./TableInList";
+import TableInListOfTables from "./TableInListOfTables";
 
 class TablesList extends Component {
 
@@ -18,7 +18,7 @@ class TablesList extends Component {
               {!isLoading ? (
                 tables.map(table => {
                   const { title, id } = table;
-                  return (<TableInList title={title} id={id} />);
+                  return (<TableInListOfTables title={title} id={id} />);
                 })
               ) : (
                   <h3>Loading tables...</h3>
