@@ -1,7 +1,14 @@
-import {combineReducers} from "redux"
-import listReducer from "./listReducer"
+import React from "react";
+import { Switch, Route } from "react-router-dom";
+import { connect } from "react-redux"
+import TableComponent from "../components/TableComponent"
 
-export default combineReducers({
+const AppRouter = () => {
+  return (
+      <Switch>
+        <Route path="/tableComponent" exact component={TableComponent}/>
+      </Switch>
+  );
+};
 
-    lists:listReducer
-});
+export default AppRouter;
