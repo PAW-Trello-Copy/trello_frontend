@@ -1,6 +1,4 @@
 import React, { Component } from 'react';
-import TableInListOfTables from "./TableInListOfTables"
-import { connect } from "react-redux"
 import MenuTable from "./menuTable/MenuTable"
 import '../style/App.css';
 import TablesList from "./TablesList"
