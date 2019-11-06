@@ -1,42 +1,16 @@
 import React, { Component } from 'react';
-import { Redirect } from "react-router-dom";
 import { makeStyles } from '@material-ui/core/styles';
 import Input from '@material-ui/core/Input';
 import Button from '@material-ui/core/Button';
 
-class TableInList extends Component {
+class AddTable extends Component {
 
-    constructor(props) {
-        super(props)
-        this.state = {
-            navigate: false,
-            referrer: null,
-            isInEditMode: false
-        };
-        this.showBoard = this.showBoard.bind(this)
-    }
+    state = {
+        value: "new table",
+        isInEditMode: false
 
-    showBoard() {
-        this.setState({referrer: '/tableComponent'});
-    }
-
-    changeEditMode = () => {
-        this.setState({
-            isInEditMode: !this.state.isInEditMode
-        })
-    }
-
-    updateComponentValue = () => {
-       
-        this.setState({
-            isInEditMode: false,
-            title: this.refs.theTextInput.title
-            
-        })
-        
-    }
-
-    renderEditView = () => {
+    };
+    addTableMode = () => {
         const useStyles = makeStyles(theme => ({
             container: {
                 display: 'flex',
@@ -69,7 +43,7 @@ class TableInList extends Component {
         return (
             <div style={styles.container}>
                 <Input
-                    defaultValue={this.props.title}
+                    defaultValue={this.state.value}
                     ref="theTextInput"
                     variant="outlined"
                     className={useStyles.input}
@@ -83,7 +57,21 @@ class TableInList extends Component {
             </div>);
     }
 
-    renderDefaultView = () => {
+    changeEditMode = () => {
+        this.setState({
+            isInEditMode: !this.state.isInEditMode
+        })
+        console.log("dsfd");
+    }
+
+    updateComponentValue = () => {
+       
+        this.setState({
+            isInEditMode: false,
+            value: this.refs.theTextInput.value
+            
+        })
+
         const styles = {
             container: {
                 backgroundColor: "#dfe3e6",
@@ -95,31 +83,35 @@ class TableInList extends Component {
                 
 
             },
-            containerForInput: {
-                display: 'flex',
-                flexWrap: 'wrap',
-            },
+          
         }
         return (
-            <div onClick={this.showBoard} style={styles.container}>
-                <h3 onDoubleClick={this.changeEditMode} >{this.props.title}</h3>               
+            <div style={styles.container}>
+                <h3 >{this.props.value}</h3>               
+            </div>
+        );
+        
+    }
+
+    rederAddButtonTable = () => {
+        return (
+            <div >
+                <button className="addButton" onClick={this.changeEditMode}>Add Table</button>
             </div>
         );
     }
 
+
+
     render() {
-
-        if (this.state.referrer) return <Redirect to={this.state.referrer + '/' + this.props.id} push></Redirect>;
-
         const { isInEditMode } = this.state;
-
         return (
-            isInEditMode ?
-                this.renderEditView() :
-                this.renderDefaultView()
+            isInEditMode?
+            this.addTableMode():            
+            this.rederAddButtonTable()
 
         );
     }
 }
 
-export default TableInList;
+export default AddTable;

@@ -1,10 +1,10 @@
 import React from 'react';
 import ReactDOM from 'react-dom'; 
-import TableInList from './../components/TableInList';
+import TablesList from '../components/TablesList';
 
 
 
 it('renders without crashing', () => {
   const div = document.createElement('div');
-  ReactDOM.render(<TableInList />, div);
+  ReactDOM.render(<TablesList />, div);
 });
