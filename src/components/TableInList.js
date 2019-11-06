@@ -17,6 +17,7 @@ class TableInList extends Component {
         showBoard() {
             console.log('aaa');
             this.setState({referrer: '/tableComponent'});
+            return <Redirect to={this.state.referrer} push></Redirect>;
         }
 
         render(){

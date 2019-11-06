@@ -4,7 +4,8 @@ import { connect } from "react-redux"
 import MenuTable from "./MenuTable"
 import '../style/App.css';
 import TablesList from "./TablesList"
-import { BrowserRouter } from "react-router-dom";
+import TableComponent from "./TableComponent"
+import { BrowserRouter, Route } from "react-router-dom";
 
 
 class App extends Component {
@@ -13,7 +14,8 @@ class App extends Component {
     return (
         <BrowserRouter>
             <div className="App">
-                <TablesList />
+                    <Route exact path="/" component={TablesList} />
+                    <Route path="/tableComponent" component={TableComponent} />
             </div>
         </BrowserRouter>
     );

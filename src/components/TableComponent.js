@@ -8,6 +8,7 @@ class TableComponent extends Component {
   render() {
     return (
       <div className="TableComponent">
+      Sukces
       </div>
     );
   }
