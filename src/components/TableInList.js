@@ -5,7 +5,7 @@ import Button from '@material-ui/core/Button';
 
 
 
-class TableInListOfTables extends Component {
+class TableInList extends Component {
     state = {
 
         isInEditMode: false
@@ -15,17 +15,19 @@ class TableInListOfTables extends Component {
         this.setState({
             isInEditMode: !this.state.isInEditMode
         })
-        console.log("dsfd");
     }
 
     updateComponentValue = () => {
+       
         this.setState({
             isInEditMode: false,
             title: this.refs.theTextInput.title
+            
         })
+        
     }
 
-    rederEditView = () => {
+    renderEditView = () => {
         const useStyles = makeStyles(theme => ({
             container: {
                 display: 'flex',
@@ -44,6 +46,8 @@ class TableInListOfTables extends Component {
         const styles = {
             container: {
                 backgroundColor: "#dfe3e6",
+                borderRadius: 3,
+                width: 300
 
             },
             forbutton: {
@@ -64,20 +68,22 @@ class TableInListOfTables extends Component {
                         'aria-label': 'description',
                     }} />
                 <div >
-                    <Button style={styles.forbutton} variant="contained" color="secondary" className={useStyles.button} onClick={this.changeEditMode}>Ok</Button>
-                    <Button style={styles.forbutton} variant="contained" color="secondary" className={useStyles.button} onClick={this.updateComponentValue}>X</Button>
+                    <Button style={styles.forbutton} variant="contained" color="primary" className={useStyles.button} onClick={this.updateComponentValue}>Ok</Button>
+                    <Button style={styles.forbutton} variant="contained" color="secondary" className={useStyles.button} onClick={this.changeEditMode}>X</Button>
                 </div>
             </div>);
     }
 
-    rederDefaultView = () => {
+    renderDefaultView = () => {
         const styles = {
             container: {
                 backgroundColor: "#dfe3e6",
                 borderRadius: 3,
-                textAlign: "left",
+                textAlign: "center",
                 marginLeft: 10,
+                marginRight: 10,
                 width: 300
+                
 
             },
             containerForInput: {
@@ -86,10 +92,8 @@ class TableInListOfTables extends Component {
             },
         }
         return (
-
             <div style={styles.container}>
-                <h3 onDoubleClick={this.changeEditMode}>{this.props.title}</h3>
-                <h2> {this.props.id}</h2>
+                <h3 onDoubleClick={this.changeEditMode}>{this.props.title}</h3>               
             </div>
         );
     }
@@ -101,8 +105,8 @@ class TableInListOfTables extends Component {
 
         return (
             isInEditMode ?
-                this.rederEditView() :
-                this.rederDefaultView()
+                this.renderEditView() :
+                this.renderDefaultView()
 
         );
     }
@@ -111,7 +115,7 @@ class TableInListOfTables extends Component {
 
 }
 
-export default TableInListOfTables;
+export default TableInList;
 
 
 

@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
-import TableInListOfTables from "./TableInListOfTables";
+import TableInList from "./TableInList";
 import CircularProgress from '@material-ui/core/CircularProgress';
-
+import AddTable from "./AddTable"
 
 class TablesList extends Component {
 
@@ -17,6 +17,7 @@ class TablesList extends Component {
     const { isLoading, tables, error } = this.state
     return (
       <div className="TableListComponent" >
+         
         {error ? <p>{error.message}</p> : null}
         <div style={styles.listTableStyle}>
           {!isLoading ? (
@@ -24,12 +25,15 @@ class TablesList extends Component {
               const { title, id } = table;
               return (
 
-                <TableInListOfTables title={title} id={id} />);
+                <TableInList title={title} />);
             })
           ) : (
               <CircularProgress color="secondary" />
             )}
+
+          <AddTable/>
         </div>
+        
       </div>
     );
   }

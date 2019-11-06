@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import MenuTable from "./menuTable/MenuTable"
+import MenuTable from "./MenuTable"
 import '../style/App.css';
 import TablesList from "./TablesList"
 
