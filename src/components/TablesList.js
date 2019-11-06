@@ -5,6 +5,10 @@ import AddTable from "./AddTable"
 
 class TablesList extends Component {
 
+  constructor(props) {
+    super(props);
+    this.fetchTables = this.fetchTables.bind(this);
+  }
   state = {
     isLoading: true,
     tables: [],
@@ -17,7 +21,7 @@ class TablesList extends Component {
     const { isLoading, tables, error } = this.state
     return (
       <div className="TableListComponent" >
-         
+         <div className="buttonAdd">  <AddTable fetchTables={this.fetchTables}/></div>
         {error ? <p>{error.message}</p> : null}
         <div style={styles.listTableStyle}>
           {!isLoading ? (
@@ -30,7 +34,7 @@ class TablesList extends Component {
               <CircularProgress color="secondary" />
             )}
 
-          <AddTable/>
+        
         </div>
         
       </div>
@@ -57,7 +61,8 @@ const styles = {
   listTableStyle: {
     display: "flex",
     flexDirection: "row",
-    marginLeft: 10
+    marginLeft: 10,
+    paddingTop:20
   }
 
 
