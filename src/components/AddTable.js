@@ -6,7 +6,7 @@ import Button from '@material-ui/core/Button';
 class AddTable extends Component {
 
     state = {
-        value: "new table",
+        title: "",
         isInEditMode: false
 
     };
@@ -30,7 +30,10 @@ class AddTable extends Component {
             container: {
                 backgroundColor: "#dfe3e6",
                 borderRadius: 3,
-                width: 300
+                textAlign: "center",
+                marginTop: 8,
+                marginLeft: 8,
+                width: 250
 
             },
             forbutton: {
@@ -42,16 +45,12 @@ class AddTable extends Component {
 
         return (
             <div style={styles.container}>
-                <Input
+                <input
                     defaultValue={this.state.value}
-                    ref="theTextInput"
-                    variant="outlined"
-                    className={useStyles.input}
-                    inputProps={{
-                        'aria-label': 'description',
-                    }} />
+                    ref="TableTitleInput"
+                />
                 <div >
-                    <Button style={styles.forbutton} variant="contained" color="primary" className={useStyles.button} onClick={this.updateComponentValue}>Ok</Button>
+                    <Button style={styles.forbutton} variant="contained" color="primary" className={useStyles.button} onClick={this.addConfirmed}>Ok</Button>
                     <Button style={styles.forbutton} variant="contained" color="secondary" className={useStyles.button} onClick={this.changeEditMode}>X</Button>
                 </div>
             </div>);
@@ -61,36 +60,35 @@ class AddTable extends Component {
         this.setState({
             isInEditMode: !this.state.isInEditMode
         })
-        console.log("dsfd");
     }
 
-    updateComponentValue = () => {
-       
-        this.setState({
-            isInEditMode: false,
-            value: this.refs.theTextInput.value
-            
+    reloadTables() {
+        this.props.fetchTables();
+    }
+
+    addConfirmed = () => {
+        let tableTitle = this.refs.TableTitleInput.value
+        fetch('https://paw-trello-backend.herokuapp.com/tables/create', {
+            method: 'POST',
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+                title: tableTitle
+            })
+        }).then(response => { 
+            if(response.ok){
+                this.reloadTables()
+            }
         })
 
-        const styles = {
-            container: {
-                backgroundColor: "#dfe3e6",
-                borderRadius: 3,
-                textAlign: "center",
-                marginLeft: 10,
-                marginRight: 10,
-                width: 300
-                
+        this.setState({
+            isInEditMode: false,
+            title: tableTitle
 
-            },
-          
-        }
-        return (
-            <div style={styles.container}>
-                <h3 >{this.props.value}</h3>               
-            </div>
-        );
-        
+        })
+
     }
 
     rederAddButtonTable = () => {
@@ -106,9 +104,9 @@ class AddTable extends Component {
     render() {
         const { isInEditMode } = this.state;
         return (
-            isInEditMode?
-            this.addTableMode():            
-            this.rederAddButtonTable()
+            isInEditMode ?
+                this.addTableMode() :
+                this.rederAddButtonTable()
 
         );
     }
