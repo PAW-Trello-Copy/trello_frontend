@@ -14,8 +14,8 @@ class App extends Component {
     return (
         <BrowserRouter>
             <div className="App">
-                    <Route exact path="/" component={TablesList} />
-                    <Route path="/tableComponent" component={TableComponent} />
+                <Route exact path="/" component={TablesList} />
+                <Route path="/tableComponent" component={TableComponent} />
             </div>
         </BrowserRouter>
     );

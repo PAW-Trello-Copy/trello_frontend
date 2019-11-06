@@ -15,13 +15,11 @@ class TableInList extends Component {
         }
 
         showBoard() {
-            console.log('aaa');
             this.setState({referrer: '/tableComponent'});
-            return <Redirect to={this.state.referrer} push></Redirect>;
         }
 
         render(){
-        if (this.state.referrer) return <Redirect to={this.state.referrer}></Redirect>;
+        if (this.state.referrer) return <Redirect to={this.state.referrer + '/' + this.props.id} push></Redirect>;
             return (
                 <div onClick={this.showBoard} style={styles.container}>
                     <h3>{this.props.title}</h3>
