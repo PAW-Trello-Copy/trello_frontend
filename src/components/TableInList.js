@@ -110,7 +110,8 @@ class TableInList extends Component {
 
     render() {
 
-        if (this.state.referrer) return <Redirect to={this.state.referrer + '/' + this.props.id} push></Redirect>;
+        var tableTitle = this.props.title.replace(' ','_');
+        if (this.state.referrer) return <Redirect to={this.state.referrer + '/' + tableTitle + '/' + this.props.id} push></Redirect>;
 
         const { isInEditMode } = this.state;
 
