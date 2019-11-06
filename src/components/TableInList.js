@@ -11,7 +11,8 @@ class TableInList extends Component {
         this.state = {
             navigate: false,
             referrer: null,
-            isInEditMode: false
+            isInEditMode: false,
+            title: props.title
         };
         this.showBoard = this.showBoard.bind(this)
     }
@@ -26,14 +27,28 @@ class TableInList extends Component {
         })
     }
 
-    updateComponentValue = () => {
-       
-        this.setState({
-            isInEditMode: false,
-            title: this.refs.theTextInput.title
-            
+    titleChangeConfirmed = () => {
+       console.log(this.refs.theTextInput.value);
+
+       var url = 'https://paw-trello-backend.herokuapp.com/tables/' + this.props.id + '/update/title'
+       fetch(url, {
+            method: 'PUT',
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+                title: this.refs.theTextInput.value
+            })
+        }).then( response => {
+            console.log(response)
+            if (response.ok) {
+                this.setState({
+                    isInEditMode: false,
+                    title: this.refs.theTextInput.value
+                })
+            }
         })
-        
     }
 
     renderEditView = () => {
@@ -68,16 +83,12 @@ class TableInList extends Component {
 
         return (
             <div style={styles.container}>
-                <Input
+                <input
                     defaultValue={this.props.title}
                     ref="theTextInput"
-                    variant="outlined"
-                    className={useStyles.input}
-                    inputProps={{
-                        'aria-label': 'description',
-                    }} />
+                    />
                 <div >
-                    <Button style={styles.forbutton} variant="contained" color="primary" className={useStyles.button} onClick={this.updateComponentValue}>Ok</Button>
+                    <Button style={styles.forbutton} variant="contained" color="primary" className={useStyles.button} onClick={this.titleChangeConfirmed}>Ok</Button>
                     <Button style={styles.forbutton} variant="contained" color="secondary" className={useStyles.button} onClick={this.changeEditMode}>X</Button>
                 </div>
             </div>);
@@ -102,7 +113,7 @@ class TableInList extends Component {
         }
         return (
             <div style={styles.container}>
-                <h3 onClick={this.showBoard}>{this.props.title}</h3>
+                <h3 onClick={this.showBoard}>{this.state.title}</h3>
                 <h4 onClick={this.changeEditMode}>Edit title </h4>           
             </div>
         );
