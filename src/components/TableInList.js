@@ -101,8 +101,9 @@ class TableInList extends Component {
             },
         }
         return (
-            <div onClick={this.showBoard} style={styles.container}>
-                <h3 onDoubleClick={this.changeEditMode} >{this.props.title}</h3>               
+            <div style={styles.container}>
+                <h3 onClick={this.showBoard}>{this.props.title}</h3>
+                <h4 onClick={this.changeEditMode}>Edit title </h4>           
             </div>
         );
     }
