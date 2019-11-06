@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
-import Input from '@material-ui/core/Input';
 import Button from '@material-ui/core/Button';
 
 class AddTable extends Component {
