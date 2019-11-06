@@ -13,7 +13,8 @@ class TableComponent extends Component {
 
     constructor(props) {
         super(props);
-        var urlData = window.location.href.substr(37);
+        var index = window.location.href.indexOf('/tableComponent');
+        var urlData = window.location.href.substr(index).replace('/tableComponent/','');
         var arr = urlData.split('/');
         this.tableTitle = arr[0].replace('_',' ');
         this.tableId = parseInt(arr[1],10);
