@@ -1,6 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom'; 
-import TablesList from '../components/TablesList';
+import TablesList from '../components/tables/TablesList';
 
 
 
