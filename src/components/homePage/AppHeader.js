@@ -62,7 +62,7 @@ const useStyles = makeStyles(theme => ({
 }));
 
 
-const MenuTbale= ()=> {
+const AppHeader= ()=> {
   const classes = useStyles();
   
   const [open] = React.useState(false);
@@ -91,4 +91,4 @@ const MenuTbale= ()=> {
   );
 }
 
-export default MenuTbale;
+export default AppHeader;

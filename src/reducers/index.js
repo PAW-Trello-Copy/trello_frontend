@@ -1,11 +1,11 @@
 import React from "react";
 import { Switch, Route } from "react-router-dom";
-import TableComponent from "../components/TableComponent";
+import MainTableComponent from "../components/homePage/MainTableComponent";
 
 const AppRouter = () => {
   return (
       <Switch>
-        <Route path="/tableComponent" exact component={TableComponent}/>
+        <Route path="/tableComponent" exact component={MainTableComponent}/>
       </Switch>
   );
 };

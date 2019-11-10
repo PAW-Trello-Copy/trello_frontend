@@ -1,6 +1,7 @@
-import React, { Component } from 'react';
-import { makeStyles } from '@material-ui/core/styles';
-import Button from '@material-ui/core/Button';
+import React, { Component } from "react";
+import { makeStyles } from '@material-ui/styles';
+import { Button } from '@material-ui/core';
+import api from "../../networking/api";
 
 class AddTable extends Component {
 
@@ -65,29 +66,26 @@ class AddTable extends Component {
         this.props.fetchTables();
     }
 
-    addConfirmed = () => {
+    addConfirmed() {
         let tableTitle = this.refs.TableTitleInput.value
-        fetch('https://paw-trello-backend.herokuapp.com/tables/create', {
+        api.request({
+            url: '/tables/create',
             method: 'POST',
-            headers: {
-                'Accept': 'application/json',
-                'Content-Type': 'application/json',
-            },
             body: JSON.stringify({
                 title: tableTitle
             })
-        }).then(response => { 
-            if(response.ok){
-                this.reloadTables()
-            }
         })
-
-        this.setState({
-            isInEditMode: false,
-            title: tableTitle
-
+        .then(response => {
+            this.reloadTables()
+            this.setState({
+                isInEditMode: false,
+                title: tableTitle
+    
+            })
         })
-
+        .catch(error => {
+            console.log('failed to add table')
+        })
     }
 
     rederAddButtonTable = () => {
@@ -97,8 +95,6 @@ class AddTable extends Component {
             </div>
         );
     }
-
-
 
     render() {
         const { isInEditMode } = this.state;
