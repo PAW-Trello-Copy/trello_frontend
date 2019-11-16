@@ -6,6 +6,11 @@ import '../../style/AddTable.css'
 
 class AddTable extends Component {
 
+
+    constructor(props) {
+        super(props);
+        this.addConfirmed = this.addConfirmed.bind(this);
+      }
     state = {
         title: "",
         isInEditMode: false
