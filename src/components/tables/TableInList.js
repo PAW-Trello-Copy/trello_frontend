@@ -17,6 +17,7 @@ class TableInList extends Component {
             title: props.title
         };
         this.showBoard = this.showBoard.bind(this)
+        this.changeTitle=this.changeTitle.bind(this)
     }
 
     showBoard() {
