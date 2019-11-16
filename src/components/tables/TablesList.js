@@ -1,7 +1,8 @@
-import React, { Component } from 'react';
 import TableInList from "./TableInList";
-import CircularProgress from '@material-ui/core/CircularProgress';
 import AddTable from "./AddTable"
+import { CircularProgress } from '@material-ui/core';
+import React, { Component } from "react";
+import api from "../../networking/api";
 
 class TablesList extends Component {
 
@@ -15,7 +16,6 @@ class TablesList extends Component {
     error: null
 
   }
-
 
   render() {
     const { isLoading, tables, error } = this.state
@@ -46,14 +46,15 @@ class TablesList extends Component {
   }
 
   fetchTables() {
-    fetch('https://paw-trello-backend.herokuapp.com/tables')
-      .then(response => response.json())
-      .then(data =>
-        this.setState({
-          tables: data,
-          isLoading: false
-        }))
-      .catch(error => this.setState({ error, isLoading: false }));
+    api.request({
+      url: '/tables'
+    })
+    .then(tables =>
+      this.setState({
+        tables: tables,
+        isLoading: false
+      }))
+    .catch(error => this.setState({ error, isLoading: false }));
   }
 }
 

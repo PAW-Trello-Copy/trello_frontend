@@ -1,7 +1,8 @@
-import React, { Component } from 'react';
+import React, { Component } from "react";
 import { Redirect } from "react-router-dom";
-import { makeStyles } from '@material-ui/core/styles';
-import Button from '@material-ui/core/Button';
+import { Button } from '@material-ui/core';
+import { makeStyles } from '@material-ui/styles';
+import api from "../../networking/api";
 
 class TableInList extends Component {
 
@@ -26,27 +27,23 @@ class TableInList extends Component {
         })
     }
 
-    titleChangeConfirmed = () => {
-       console.log(this.refs.theTextInput.value);
-
-       var url = 'https://paw-trello-backend.herokuapp.com/tables/' + this.props.id + '/update/title'
-       fetch(url, {
+    changeTitle() {
+        const newTitle = this.refs.theTextInput.value;
+        api.request({
+            url: `/tables/${this.props.id}/update/title`,
             method: 'PUT',
-            headers: {
-                'Accept': 'application/json',
-                'Content-Type': 'application/json',
-            },
             body: JSON.stringify({
-                title: this.refs.theTextInput.value
+                title: newTitle
             })
-        }).then( response => {
-            console.log(response)
-            if (response.ok) {
-                this.setState({
-                    isInEditMode: false,
-                    title: this.refs.theTextInput.value
-                })
-            }
+        })
+        .then(response => {
+            this.setState({
+                isInEditMode: false,
+                title: newTitle
+            })
+        })
+        .catch(error => {
+            console.log('failed to update title')
         })
     }
 
@@ -87,7 +84,7 @@ class TableInList extends Component {
                     ref="theTextInput"
                     />
                 <div >
-                    <Button style={styles.forbutton} variant="contained" color="primary" className={useStyles.button} onClick={this.titleChangeConfirmed}>Ok</Button>
+                    <Button style={styles.forbutton} variant="contained" color="primary" className={useStyles.button} onClick={this.changeTitle}>Ok</Button>
                     <Button style={styles.forbutton} variant="contained" color="secondary" className={useStyles.button} onClick={this.changeEditMode}>X</Button>
                 </div>
             </div>);

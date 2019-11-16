@@ -1,9 +1,6 @@
 import React, { Component } from 'react';
 
-
-
-class ListInTable extends Component {
-
+class ListElement extends Component {
 
     render(){
         return (
@@ -26,4 +23,4 @@ const styles = {
     }
 }
 
-export default ListInTable;
+export default ListElement;

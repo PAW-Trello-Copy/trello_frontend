@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
-import ListInTable from "./ListInTable";
+import ListElement from "../lists/ListElement"
+import api from '../../networking/api';
 
 
-
-class TableComponent extends Component {
+class MainTableComponent extends Component {
 
     state = {
         isLoading: true,
@@ -23,18 +23,16 @@ class TableComponent extends Component {
 
     addNewList() {
         var newListName = document.getElementById("new_list_name").value;
-        fetch('https://paw-trello-backend.herokuapp.com/lists/create', {
+        api.request({
+            url: '/lists/create',
             method: 'POST',
-            headers: {
-                'Accept': 'application/json',
-                'Content-Type': 'application/json',
-            },
             body: JSON.stringify({
                 tableId: this.tableId,
                 title: newListName+'',
             })
         })
-        window.location.reload();
+        .then(result => this.fetchLists())
+        .catch(error => {console.log("failed to add new list")});
     }
 
     render() {
@@ -49,7 +47,7 @@ class TableComponent extends Component {
                     {!isLoading ? (
                         lists.map(list => {
                             const { title, id } = list;
-                            return (<ListInTable title={title} id={id} />);
+                            return (<ListElement title={title} id={id} />);
                         })
                     ) : (
                         <h3>Loading lists...</h3>
@@ -72,14 +70,15 @@ class TableComponent extends Component {
     }
 
     fetchLists() {
-        fetch('https://paw-trello-backend.herokuapp.com/tables/' + this.tableId + '/lists')
-            .then(response => response.json())
-            .then(data =>
-                this.setState({
-                lists: data,
+        api.request({
+            url: `/tables/${this.tableId}/lists`
+        })
+        .then(lists => {
+            this.setState({
+                lists: lists,
                 isLoading: false
-            }))
-        .catch(error => this.setState({error, isLoading: false }));
+            })
+        })
     }
 }
 
@@ -98,4 +97,4 @@ const styles = {
     }
 };
 
-export default TableComponent;
+export default MainTableComponent;
