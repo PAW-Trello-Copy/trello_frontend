@@ -83,19 +83,6 @@ class MainTableComponent extends Component {
     }
 }
 
-const styles = {
-    listTableStyle: {
-      display: "flex",
-      flexDirection: "row",
-      marginLeft: 10
-    },
-    container: {
-        backgroundColor: "#dfe3e6",
-        borderRadius: 3,
-        textAlign: "center",
-        marginLeft: 10,
-        width: 300
-    }
-};
+
 
 export default MainTableComponent;
