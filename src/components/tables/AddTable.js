@@ -1,7 +1,8 @@
 import React, { Component } from "react";
-import { makeStyles } from '@material-ui/styles';
+//import { makeStyles } from '@material-ui/styles';
 import { Button } from '@material-ui/core';
 import api from "../../networking/api";
+import '../../style/AddTable.css'
 
 class AddTable extends Component {
 
@@ -10,48 +11,17 @@ class AddTable extends Component {
         isInEditMode: false
 
     };
-    addTableMode = () => {
-        const useStyles = makeStyles(theme => ({
-            container: {
-                display: 'flex',
-                flexWrap: 'wrap',
-            },
-            input: {
-                margin: theme.spacing(1),
-                color: "white"
-            },
-            button: {
-                margin: theme.spacing(1),
-            },
-
-        }));
-
-        const styles = {
-            container: {
-                backgroundColor: "#dfe3e6",
-                borderRadius: 3,
-                textAlign: "center",
-                marginTop: 8,
-                marginLeft: 8,
-                width: 250
-
-            },
-            forbutton: {
-                marginRight: 15,
-                marginTop: 5
-            }
-
-        }
+    addTableMode = () => {      
 
         return (
-            <div style={styles.container}>
-                <input
+            <div className="AddTable">
+                <input className="forInput"
                     defaultValue={this.state.value}
                     ref="TableTitleInput"
                 />
                 <div >
-                    <Button style={styles.forbutton} variant="contained" color="primary" className={useStyles.button} onClick={this.addConfirmed}>Ok</Button>
-                    <Button style={styles.forbutton} variant="contained" color="secondary" className={useStyles.button} onClick={this.changeEditMode}>X</Button>
+                    <Button  variant="contained" color="primary" className="forButton" onClick={this.addConfirmed}>Ok</Button>
+                    <Button  variant="contained" color="secondary" className="forButton" onClick={this.changeEditMode}>X</Button>
                 </div>
             </div>);
     }
@@ -91,7 +61,7 @@ class AddTable extends Component {
     rederAddButtonTable = () => {
         return (
             <div >
-                <button className="addButton" onClick={this.changeEditMode}>Add Table</button>
+                <Button  variant="contained" color="secondary" className="addButton" onClick={this.changeEditMode}>Add Table</Button>
             </div>
         );
     }
