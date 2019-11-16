@@ -1,0 +1,17 @@
+.ListTableStyle{
+    display: flex;
+    flex-direction: row;
+    margin-left: 10px;
+}
+.ContainerList{
+    background-color: #dfe3e6;
+    margin-left: 10px;    
+    border-radius: 3px;
+    text-align: center;
+    width: 300px;
+}
+.title{
+    font-size:30px;
+    margin-bottom: 20px;
+    margin-top: 5px;
+}

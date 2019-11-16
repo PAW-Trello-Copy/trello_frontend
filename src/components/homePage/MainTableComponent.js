@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import ListElement from "../lists/ListElement"
 import api from '../../networking/api';
+import '../../style/MainTableComponent.css'
 
 
 class MainTableComponent extends Component {
@@ -38,12 +39,12 @@ class MainTableComponent extends Component {
     render() {
         const { isLoading, lists, error } = this.state
         return (
-            <div className="TableListComponent">
-                <div>
+            <div>
+                <div className="title">
                     {this.tableTitle}
                 </div>
                 {error ? <p>{error.message}</p> : null}
-                <div style={styles.listTableStyle}>
+                <div className="ListTableStyle">
                     {!isLoading ? (
                         lists.map(list => {
                             const { title, id } = list;
@@ -52,7 +53,7 @@ class MainTableComponent extends Component {
                     ) : (
                         <h3>Loading lists...</h3>
                     )}
-                    <div style={styles.container}>
+                    <div className="ContainerList">
                         <input type="text"
                                id="new_list_name"
                                required="required"

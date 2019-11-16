@@ -3,6 +3,8 @@ import { Redirect } from "react-router-dom";
 import { Button } from '@material-ui/core';
 import { makeStyles } from '@material-ui/styles';
 import api from "../../networking/api";
+import '../../style/TabInList.css';
+
 
 class TableInList extends Component {
 
@@ -90,25 +92,9 @@ class TableInList extends Component {
             </div>);
     }
 
-    renderDefaultView = () => {
-        const styles = {
-            container: {
-                backgroundColor: "#dfe3e6",
-                borderRadius: 3,
-                textAlign: "center",
-                marginLeft: 10,
-                marginRight: 10,
-                width: 300
-                
-
-            },
-            containerForInput: {
-                display: 'flex',
-                flexWrap: 'wrap',
-            },
-        }
+    renderDefaultView = () => {       
         return (
-            <div style={styles.container}>
+            <div  className="TabInList">
                 <h3 onClick={this.showBoard}>{this.state.title}</h3>
                 <h4 onClick={this.changeEditMode}>Edit title </h4>           
             </div>

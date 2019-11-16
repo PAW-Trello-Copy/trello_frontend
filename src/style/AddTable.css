@@ -1,0 +1,18 @@
+.AddTable{
+    background-color: #dfe3e6;
+    margin-left: 8px;
+    margin-top: 8px;
+    border-radius: 3px;
+    text-align: center;
+    width: 250px;
+    height: 100px;
+}
+.forButton{
+   padding-left: 15px;
+}
+.forInput{
+    margin-bottom: 5px;
+}
+.addButton{
+    background-color:#4caf50;
+}

@@ -3,6 +3,7 @@ import AddTable from "./AddTable"
 import { CircularProgress } from '@material-ui/core';
 import React, { Component } from "react";
 import api from "../../networking/api";
+import '../../style/TablesList.css'
 
 class TablesList extends Component {
 
@@ -23,7 +24,7 @@ class TablesList extends Component {
       <div className="TableListComponent" >
          <div className="buttonAdd">  <AddTable fetchTables={this.fetchTables}/></div>
         {error ? <p>{error.message}</p> : null}
-        <div style={styles.listTableStyle}>
+        <div className="TablesList">
           {!isLoading ? (
             tables.map(table => {
               const { title, id } = table;
@@ -57,16 +58,5 @@ class TablesList extends Component {
     .catch(error => this.setState({ error, isLoading: false }));
   }
 }
-
-const styles = {
-  listTableStyle: {
-    display: "flex",
-    flexDirection: "row",
-    marginLeft: 10,
-    paddingTop:20
-  }
-
-
-};
 
 export default TablesList;
