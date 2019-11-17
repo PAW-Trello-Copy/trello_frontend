@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import {Modal, ModalHeader, ModalBody} from 'reactstrap';
-import api from '../../networking/api';
 import '../../style/CardElement.css'
 
 class CardElement extends Component {
@@ -16,17 +15,14 @@ class CardElement extends Component {
     }
 
     showCardModal(){
-        console.log("showCardModal");
         this.setState({showModal: true});
     }
 
     closeCartModal(){
-        console.log("showCardModal");
         this.setState({showModal: false});
     }
 
     render(){
-        const {showModal} = this.state;
         return (
             <div>
                 <div onClick={this.showCardModal} className="CardElement">

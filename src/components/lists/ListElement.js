@@ -48,7 +48,7 @@ class ListElement extends Component {
     }
 
     render(){
-        const { isLoading, cards, error } = this.state
+        const { isLoading, cards } = this.state
         return (
             <div className="ListElement">
                 <h3>{this.props.title}</h3>
