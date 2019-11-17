@@ -1,0 +1,19 @@
+.CardElement{
+    background-color: white;
+    border-radius: 10px;
+    margin: 10px 5px;
+    padding: 1px 0;
+}
+.CartModal{
+    background-color: white;
+    border: 1px solid black;
+    left: 20%;
+    right: 20%;
+    position: absolute;
+    text-align: center;
+    margin-top: 20px;
+}
+.closeButton_cartModal{
+    margin: 20px;
+    float: right;
+}
