@@ -13,7 +13,31 @@
     text-align: center;
     margin-top: 20px;
 }
-.closeButton_cartModal{
-    margin: 20px;
+.button_group{
     float: right;
+}
+.closeButton_cartModal{
+    margin: 20px 20px 20px 5px;
+}
+.editButton_cartModal{
+    margin: 20px 5px 20px;
+}
+.saveButton_cartModal{
+    margin: 20px 5px 20px;
+}
+.display_element{
+    display: inline-block;
+}
+.hide_element{
+    display: none;
+}
+#cart_title_input{
+    height: 20px;
+    width: -webkit-fill-available;
+    margin: 0 20px;
+}
+#cart_description_input{
+    width: -webkit-fill-available;
+    margin: 0 20px;
+    height: 100px
 }

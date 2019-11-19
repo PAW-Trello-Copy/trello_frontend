@@ -14,6 +14,7 @@ class ListElement extends Component {
     constructor(props) {
         super(props);
         this.addCard = this.addCard.bind(this);
+        this.fetchCards = this.fetchCards.bind(this);
     }
 
     componentDidMount() {
@@ -56,7 +57,7 @@ class ListElement extends Component {
                     {!isLoading ? (
                         cards.map(card => {
                             const { title, id, listId, description } = card;
-                            return (<CardElement title={title} id={id} listId={listId} description={description} />);
+                            return (<CardElement title={title} id={id} listId={listId} description={description} callback={this.fetchCards}/>);
                         })
                     ) : (
                         <h3>Loading cards...</h3>
