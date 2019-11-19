@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import {Modal, ModalHeader, ModalBody} from 'reactstrap';
 import '../../style/CardElement.css'
+import api from '../../networking/api';
 
 class CardElement extends Component {
 
@@ -12,6 +13,7 @@ class CardElement extends Component {
         super(props);
         this.closeCartModal = this.closeCartModal.bind(this);
         this.showCardModal = this.showCardModal.bind(this);
+        this.saveCard = this.saveCard.bind(this);
     }
 
     showCardModal(){
@@ -22,6 +24,51 @@ class CardElement extends Component {
         this.setState({showModal: false});
     }
 
+    showEditLayout(){
+        document.getElementsByClassName("saveButton_cartModal")[0].classList.replace("hide_element","display_element");
+        document.getElementsByClassName("editButton_cartModal")[0].classList.replace("display_element","hide_element");
+        document.getElementById("cart_title_input").classList.replace("hide_element","display_element");
+        document.getElementsByClassName("cart_title")[0].classList.replace("display_element","hide_element");
+        document.getElementById("cart_description_input").classList.replace("hide_element","display_element");
+        document.getElementsByClassName("cart_description")[0].classList.replace("display_element","hide_element");
+    }
+
+    hideEditLayout(){
+        document.getElementsByClassName("saveButton_cartModal")[0].classList.replace("display_element","hide_element");
+        document.getElementsByClassName("editButton_cartModal")[0].classList.replace("hide_element","display_element");
+        document.getElementById("cart_title_input").classList.replace("display_element","hide_element");
+        document.getElementsByClassName("cart_title")[0].classList.replace("hide_element","display_element");
+        document.getElementById("cart_description_input").classList.replace("display_element","hide_element");
+        document.getElementsByClassName("cart_description")[0].classList.replace("hide_element","display_element");
+    }
+
+    saveCard(){
+        var newCardTitle = document.getElementById("cart_title_input").value;
+        var newCardDescription = document.getElementById("cart_description_input").value;
+        if(newCardTitle !== this.props.title){
+            api.request({
+                url: `/cards/${this.props.id}/update/title`,
+                method: 'PUT',
+                body: JSON.stringify({
+                    title: newCardTitle
+                })
+            })
+            .catch(error => {console.log("failed to update card's title")});
+        }
+        if(newCardDescription !== this.props.description){
+            api.request({
+                url: `/cards/${this.props.id}/update/description`,
+                method: 'PUT',
+                body: JSON.stringify({
+                    description: newCardDescription
+                })
+            })
+            .catch(error => {console.log("failed to update card's title")});
+        }
+        this.hideEditLayout();
+        this.props.callback();
+    }
+
     render(){
         return (
             <div>
@@ -30,12 +77,18 @@ class CardElement extends Component {
                 </div>
                 <Modal isOpen={this.state.showModal} className="CartModal">
                     <ModalHeader>
-                        {this.props.title}
+                        <textarea id="cart_title_input" className="hide_element" defaultValue={this.props.title}/>
+                        <div className="cart_title display_element">{this.props.title}</div>
                     </ModalHeader>
                     <ModalBody>
-                        {this.props.description}
+                        <textarea id="cart_description_input" className="hide_element" defaultValue={this.props.description}/>
+                        <div className="cart_description display_element">{this.props.description}</div>
                     </ModalBody>
-                    <button color="primary" onClick={this.closeCartModal} className="closeButton_cartModal">Close</button>
+                    <div className="button_group">
+                        <button color="primary" onClick={this.saveCard} className="saveButton_cartModal hide_element">Save</button>
+                        <button color="primary" onClick={this.showEditLayout} className="editButton_cartModal display_element">Edit</button>
+                        <button color="primary" onClick={this.closeCartModal} className="closeButton_cartModal">Close</button>
+                    </div>
                 </Modal>
             </div>
         );
