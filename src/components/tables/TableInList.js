@@ -4,7 +4,7 @@ import { Button } from '@material-ui/core';
 import { makeStyles } from '@material-ui/styles';
 import api from "../../networking/api";
 import '../../style/TabInList.css';
-
+import Icon from '@material-ui/core/Icon';
 
 class TableInList extends Component {
 
@@ -97,7 +97,7 @@ class TableInList extends Component {
         return (
             <div  className="TabInList">
                 <h3 onClick={this.showBoard}>{this.state.title}</h3>
-                <h4 onClick={this.changeEditMode}>Edit title </h4>           
+                <h4 onClick={this.changeEditMode}><Icon color="primary">edit</Icon></h4>           
             </div>
         );
     }
