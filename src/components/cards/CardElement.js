@@ -7,6 +7,7 @@ class CardElement extends Component {
 
     state = {
         showModal: false
+       
     }
 
     constructor(props) {
@@ -14,11 +15,14 @@ class CardElement extends Component {
         this.closeCartModal = this.closeCartModal.bind(this);
         this.showCardModal = this.showCardModal.bind(this);
         this.saveCard = this.saveCard.bind(this);
+        this.archiveCard = this.archiveCard.bind(this);
+       
     }
 
     showCardModal(){
         this.setState({showModal: true});
     }
+
 
     closeCartModal(){
         this.setState({showModal: false});
@@ -68,7 +72,20 @@ class CardElement extends Component {
         this.hideEditLayout();
         this.props.callback();
     }
-
+    archiveCard(){
+       
+        api.request({
+            url: `/cards/${this.props.id}/update/archived`,            
+            method: 'PUT',
+            body: JSON.stringify({
+                archived: true
+            })
+            
+        })
+        .catch(error => {console.log("failed to update card's archive")});
+       
+       this.props.callback();
+    }
     render(){
         return (
             <div>
@@ -86,6 +103,7 @@ class CardElement extends Component {
                     </ModalBody>
                     <div className="button_group">
                         <button color="primary" onClick={this.saveCard} className="saveButton_cartModal hide_element">Save</button>
+                        <button color="primary" onClick={this.archiveCard} className="editButton_cartModal display_element">Archive</button>
                         <button color="primary" onClick={this.showEditLayout} className="editButton_cartModal display_element">Edit</button>
                         <button color="primary" onClick={this.closeCartModal} className="closeButton_cartModal">Close</button>
                     </div>
