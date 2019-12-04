@@ -1,0 +1,26 @@
+.comment_owner{
+    margin-left: 5px;
+}
+.comment_text{
+    width: -webkit-fill-available;
+    border: solid 1px black;
+    background-color: white;
+    padding: 5px;
+}
+.edit_comment{
+    float: right;
+    margin: 10px 0 20px 0;
+}
+.display_element{
+    display: inline-block !important;
+}
+.hide_element{
+    display: none;
+}
+.comment_item{
+    padding-bottom: 30px;
+}
+.comment_text_edit{
+    width: -webkit-fill-available;
+    height: 25px;
+}
