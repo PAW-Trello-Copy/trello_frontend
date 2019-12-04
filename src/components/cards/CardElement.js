@@ -7,10 +7,12 @@ import CardComment from "./CardComment"
 class CardElement extends Component {
 
     state = {
+
         showModal: false,
         isLoading: true,
         comments: [],
         error: null
+
     }
 
     constructor(props) {
@@ -26,11 +28,13 @@ class CardElement extends Component {
 
     componentDidMount() {
         this.getComments();
+        this.archiveCard = this.archiveCard.bind(this);
     }
 
     showCardModal(){
         this.setState({showModal: true});
     }
+
 
     closeCartModal(){
         this.setState({showModal: false});
@@ -124,7 +128,20 @@ class CardElement extends Component {
         this.getComments();
         this.setState({ state: this.state });
     }
-
+    archiveCard(){
+       
+        api.request({
+            url: `/cards/${this.props.id}/update/archived`,            
+            method: 'PUT',
+            body: JSON.stringify({
+                archived: true
+            })
+            
+        })
+        .catch(error => {console.log("failed to update card's archive")});
+       
+       this.props.callback();
+    }
     render(){
         const { isLoading, comments } = this.state
         return (
@@ -144,6 +161,7 @@ class CardElement extends Component {
                     <div className="button_group">
                         <button color="primary" onClick={this.deleteCard} className="deleteButton_cartModal">Delete</button>
                         <button color="primary" onClick={this.saveCard} className="saveButton_cartModal hide_element">Save</button>
+                        <button color="primary" onClick={this.archiveCard} className="editButton_cartModal display_element">Archive</button>
                         <button color="primary" onClick={this.showEditLayout} className="editButton_cartModal display_element">Edit</button>
                         <button color="primary" onClick={this.closeCartModal} className="closeButton_cartModal">Close</button>
                     </div>

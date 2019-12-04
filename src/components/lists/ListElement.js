@@ -1,14 +1,19 @@
 import React, { Component } from 'react';
 import api from '../../networking/api';
-import CardElement from "../cards/CardElement"
-import '../../style/ListElement.css'
+import CardElement from "../cards/CardElement";
+import ArchiveCard from"../archivecard/ArchiveCard";
+import '../../style/ListElement.css';
+
+
 
 class ListElement extends Component {
 
     state = {
         isLoading: true,
-        cards: [],
-        error: null
+        cards: [],       
+        error: null,
+        listArchiveMode: false,
+        showModal: false
     }
 
     constructor(props) {
@@ -18,21 +23,35 @@ class ListElement extends Component {
         this.refreshListElementComponent = this.refreshListElementComponent.bind(this);
     }
 
+    showCardModal(){    
+
+        this.setState({showModal: true});
+         
+     }
+ 
     componentDidMount() {
         this.fetchCards();
+    }
+    listaArchive = () => {
+        this.setState({
+            listArchiveMode: !this.state.listArchiveMode
+        })
     }
 
     fetchCards() {
         api.request({
-            url: `/lists/${this.props.id}/cards`
+            url: `/lists/${this.props.id}/cards?archived=false`
         })
         .then(cards => {
             this.setState({
-                cards: cards,
+                cards: cards,               
                 isLoading: false
             })
         })
+       
+
     }
+
 
     addCard(){
         var newCardName = document.getElementById("new_cart_title_"+this.props.id).value;
@@ -55,10 +74,18 @@ class ListElement extends Component {
     }
 
     render(){
-        const { isLoading, cards } = this.state
+        const { isLoading, cards} = this.state
+        
+     
         return (
+            
             <div className="ListElement">
-                <h3>{this.props.title}</h3>
+                <div className="titleList">
+                <h3 className="titleName">{this.props.title}</h3>
+                <div className="buttonArch"  >              
+                <ArchiveCard title={this.props.title} id={this.props.id} listId={this.props.listId}   />
+                </div>
+                </div>
                 <div>
                     {!isLoading ? (
                         cards.map(card => {
@@ -68,10 +95,11 @@ class ListElement extends Component {
                     ) : (
                         <h3>Loading cards...</h3>
                     )}
-                </div>
+                </div>                
                 <input id={"new_cart_title_"+this.props.id} className="new_cart_title"/>
                 <button className="button_addCard" onClick={this.addCard}>Add card</button>
             </div>
+           
         );
     }
 }
