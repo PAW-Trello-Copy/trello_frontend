@@ -61,7 +61,6 @@ class CardElement extends Component {
     saveCard(){
         var newCardTitle = document.getElementById("cart_title_input").value;
         var newCardDescription = document.getElementById("cart_description_input").value;
-        if(newCardTitle !== this.props.title){
             api.request({
                 url: `/cards/${this.props.id}/update/title`,
                 method: 'PUT',
@@ -70,8 +69,6 @@ class CardElement extends Component {
                 })
             })
             .catch(error => {console.log("failed to update card's title")});
-        }
-        if(newCardDescription !== this.props.description){
             api.request({
                 url: `/cards/${this.props.id}/update/description`,
                 method: 'PUT',
@@ -80,8 +77,6 @@ class CardElement extends Component {
                 })
             })
             .catch(error => {console.log("failed to update card's title")});
-        }
-        //this.hideEditLayout();
         window.location.reload(false);
     }
 
