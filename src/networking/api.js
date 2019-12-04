@@ -53,6 +53,31 @@ class Api {
         }
     };
 
+    sendFile = async ({url, formData,headers = {}}) => {
+        try {
+            const accessToken = cookies.get("accessToken");
+            headers['Content-Type'] ='multipart/form-data';            
+            headers['Authorization'] = 'Bearer ' + accessToken;
+            headers['Access-Control-Allow-Origin'] = '*';
+      
+            console.log(headers)
+            console.log(accessToken)
+            
+            let request = {
+                url: url,
+                method: 'post',
+                headers: headers,
+                data: formData
+            }
+            
+            const response = await this.adapter.request(request)
+                .catch(err =>this.handleError(err, request))
+                return Promise.resolve(response.data)
+        } catch (err) {
+            return Promise.reject(err);
+        }
+    };
+
     handleError = async (err, request) => {
         return Promise.reject(err);
         //for auth

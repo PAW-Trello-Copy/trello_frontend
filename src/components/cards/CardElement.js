@@ -3,6 +3,7 @@ import {Modal, ModalHeader, ModalBody} from 'reactstrap';
 import '../../style/CardElement.css'
 import api from '../../networking/api';
 import AttachmentCard from '../attachmentCard/AttachmentCard'
+import ShowAttchment from '../attachmentCard/ShowAttchment'
 
 class CardElement extends Component {
 
@@ -102,9 +103,12 @@ class CardElement extends Component {
                     <ModalBody>
                         <textarea id="cart_description_input" className="hide_element" defaultValue={this.props.description}/>
                         <div className="cart_description display_element">{this.props.description}</div>
+                        <ShowAttchment title={this.props.title} id={this.props.id}/>
                     </ModalBody>
-                    <div className="button_group">
-                        <AttachmentCard/>
+                    <div className="Attchment">
+                    <AttachmentCard title={this.props.title} id={this.props.id}/>
+                    </div>
+                    <div className="button_group">                       
                         <button color="primary" onClick={this.saveCard} className="saveButton_cartModal hide_element">Save</button>
                         <button color="primary" onClick={this.archiveCard} className="editButton_cartModal display_element">Archive</button>
                         <button color="primary" onClick={this.showEditLayout} className="editButton_cartModal display_element">Edit</button>

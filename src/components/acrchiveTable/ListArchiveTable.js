@@ -1,7 +1,6 @@
 import React, { Component } from "react";
 import { Button } from '@material-ui/core';
 import {Modal, ModalHeader} from 'reactstrap';
-import api from "../../networking/api";
 import '../../style/AddTable.css';
 import ListArchivedComponentTables from './ListArchivedComponentTables'
 

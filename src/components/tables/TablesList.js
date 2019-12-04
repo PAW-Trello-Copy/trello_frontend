@@ -48,7 +48,7 @@ class TablesList extends Component {
 
   fetchTables() {
     api.request({
-      url: '/tables?archived=false'
+      url: `/tables?archived=false`
     })
     .then(tables =>
       this.setState({

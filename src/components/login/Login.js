@@ -49,6 +49,7 @@ class Login extends Component {
          }).then( result => {
              cookies.set("accessToken", result.string, 365);// tut ne uveren 4to result.string.
              //no w obshem prihodit JSON, v kotorom tebe nujno pole 'string'
+             console.log('ACCESS TOKEN UPDATED')
              this.showBoard();
            
 

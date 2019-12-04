@@ -33,17 +33,17 @@ class ButtonsArchiveTableList extends Component {
        
     }
     deleteTable(){
-        
+      
         api.request({
             url: `/tables/${this.props.id}`,            
-            method: 'DELETE'           
+            method: 'DELETE'
+                      
             
         })
         .catch(error => {console.log("failed to update card's ")});
     }
     render(){
         return(
-
              <div className="cart_title display_element archive_style">
                    <h4 className="forH2">{this.props.title}</h4>
                    <Icon onClick={this.removeToList} >redo</Icon>

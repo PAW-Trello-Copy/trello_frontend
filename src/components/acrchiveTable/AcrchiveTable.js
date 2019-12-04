@@ -16,9 +16,7 @@ class AcrchiveTable extends Component {
     }
 
   
-    componentDidMount() {
-      this.archiveTable();
-      }
+    
 
     archiveTable(){
        
