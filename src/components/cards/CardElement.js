@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import {Modal, ModalHeader, ModalBody} from 'reactstrap';
 import '../../style/CardElement.css'
 import api from '../../networking/api';
+import AttachmentCard from '../attachmentCard/AttachmentCard'
 
 class CardElement extends Component {
 
@@ -91,6 +92,7 @@ class CardElement extends Component {
             <div>
                 <div onClick={this.showCardModal} className="CardElement">
                     <h3>{this.props.title}</h3>
+                    
                 </div>
                 <Modal isOpen={this.state.showModal} className="CartModal">
                     <ModalHeader>
@@ -102,6 +104,7 @@ class CardElement extends Component {
                         <div className="cart_description display_element">{this.props.description}</div>
                     </ModalBody>
                     <div className="button_group">
+                        <AttachmentCard/>
                         <button color="primary" onClick={this.saveCard} className="saveButton_cartModal hide_element">Save</button>
                         <button color="primary" onClick={this.archiveCard} className="editButton_cartModal display_element">Archive</button>
                         <button color="primary" onClick={this.showEditLayout} className="editButton_cartModal display_element">Edit</button>

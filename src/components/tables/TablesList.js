@@ -29,7 +29,7 @@ class TablesList extends Component {
             tables.map(table => {
               const { title, id } = table;
               return (
-                <TableInList title={title} id={id} />);
+                <TableInList title={title} id={id}  />);
             })
           ) : (
               <CircularProgress color="secondary" />
@@ -48,7 +48,7 @@ class TablesList extends Component {
 
   fetchTables() {
     api.request({
-      url: '/tables'
+      url: '/tables?archived=false'
     })
     .then(tables =>
       this.setState({
