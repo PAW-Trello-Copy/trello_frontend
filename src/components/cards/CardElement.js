@@ -4,12 +4,18 @@ import '../../style/CardElement.css'
 import api from '../../networking/api';
 import AttachmentCard from '../attachmentCard/AttachmentCard'
 import ShowAttchment from '../attachmentCard/ShowAttchment'
+import CardComment from "./CardComment"
+
 
 class CardElement extends Component {
 
     state = {
-        showModal: false
-       
+
+        showModal: false,
+        isLoading: true,
+        comments: [],
+        error: null
+
     }
 
     constructor(props) {
@@ -17,8 +23,15 @@ class CardElement extends Component {
         this.closeCartModal = this.closeCartModal.bind(this);
         this.showCardModal = this.showCardModal.bind(this);
         this.saveCard = this.saveCard.bind(this);
+        this.deleteCard = this.deleteCard.bind(this);
+        this.getComments = this.getComments.bind(this);
+        this.addComment = this.addComment.bind(this);
+        this.refreshCardElementComponent = this.refreshCardElementComponent.bind(this);
+    }
+
+    componentDidMount() {
+        this.getComments();
         this.archiveCard = this.archiveCard.bind(this);
-       
     }
 
     showCardModal(){
@@ -51,7 +64,6 @@ class CardElement extends Component {
     saveCard(){
         var newCardTitle = document.getElementById("cart_title_input").value;
         var newCardDescription = document.getElementById("cart_description_input").value;
-        if(newCardTitle !== this.props.title){
             api.request({
                 url: `/cards/${this.props.id}/update/title`,
                 method: 'PUT',
@@ -60,8 +72,6 @@ class CardElement extends Component {
                 })
             })
             .catch(error => {console.log("failed to update card's title")});
-        }
-        if(newCardDescription !== this.props.description){
             api.request({
                 url: `/cards/${this.props.id}/update/description`,
                 method: 'PUT',
@@ -70,9 +80,51 @@ class CardElement extends Component {
                 })
             })
             .catch(error => {console.log("failed to update card's title")});
-        }
-        this.hideEditLayout();
-        this.props.callback();
+        window.location.reload(false);
+    }
+
+    deleteCard(){
+        api.request({
+            url: `/cards/${this.props.id}`,
+            method: 'DELETE',
+            body: JSON.stringify({
+
+            })
+        })
+        .catch(error => {console.log("failed to delete card")});
+        window.location.reload(false);
+    }
+
+    getComments(){
+        api.request({
+            url: `/cards/${this.props.id}/comments`
+        })
+        .then(comments => {
+            this.setState({
+                comments: comments,
+                isLoading: false
+            })
+        })
+    }
+
+    addComment(){
+        var newCommentText = document.getElementById("new_comment_"+this.props.id).value;
+        api.request({
+            url: '/comments/create',
+            method: 'POST',
+            body: JSON.stringify({
+                cardId: this.props.id,
+                text: newCommentText,
+            })
+        })
+        .then(result => this.getComments())
+        .catch(error => {console.log("failed to add new comment")});
+        document.getElementById("new_comment_"+this.props.id).value = "";
+    }
+
+    refreshCardElementComponent(){
+        this.getComments();
+        this.setState({ state: this.state });
     }
     archiveCard(){
        
@@ -89,6 +141,7 @@ class CardElement extends Component {
        this.props.callback();
     }
     render(){
+        const { isLoading, comments } = this.state
         return (
             <div>
                 <div onClick={this.showCardModal} className="CardElement">
@@ -105,14 +158,34 @@ class CardElement extends Component {
                         <div className="cart_description display_element">{this.props.description}</div>
                         <ShowAttchment title={this.props.title} id={this.props.id}/>
                     </ModalBody>
+
                     <div className="Attchment">
                     <AttachmentCard title={this.props.title} id={this.props.id}/>
-                    </div>
-                    <div className="button_group">                       
+                    </div>         
+                    <div className="button_group">
+                        <button color="primary" onClick={this.deleteCard} className="deleteButton_cartModal">Delete</button>
                         <button color="primary" onClick={this.saveCard} className="saveButton_cartModal hide_element">Save</button>
                         <button color="primary" onClick={this.archiveCard} className="editButton_cartModal display_element">Archive</button>
                         <button color="primary" onClick={this.showEditLayout} className="editButton_cartModal display_element">Edit</button>
                         <button color="primary" onClick={this.closeCartModal} className="closeButton_cartModal">Close</button>
+                    </div>
+                    <div className="comments_block">
+                        {!isLoading ? (
+                            comments.map(comment => {
+                                const { id, text, cartId, userId, ownerName, ownedByUser } = comment;
+                                return (<CardComment id={id} text={text} cartId={cartId} userId={userId} ownerName={ownerName}
+                                    ownedByUser={ownedByUser} callback={this.refreshCardElementComponent}/>);
+                            })
+                        ) : (
+                            <h3>Loading comments...</h3>
+                        )}
+                        <div>
+                            <textarea id={"new_comment_"+this.props.id} className="new_comment display_element"/>
+                        </div>
+                        <div>
+                            <button color="primary" onClick={this.addComment} className="addComment_cartModal">Add comment</button>
+                            <button color="primary" className="addAttachment_cartModal">Add attachment</button>
+                        </div>
                     </div>
                 </Modal>
             </div>

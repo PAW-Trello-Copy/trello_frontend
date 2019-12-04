@@ -5,7 +5,7 @@
     padding: 1px 0;
 }
 .CartModal{
-    background-color: white;
+    background-color: #f5f1f1;
     border: 1px solid black;
     left: 20%;
     right: 20%;
@@ -19,10 +19,9 @@
 .closeButton_cartModal{
     margin: 20px 20px 20px 5px;
 }
-.editButton_cartModal{
-    margin: 20px 5px 20px;
-}
-.saveButton_cartModal{
+.editButton_cartModal,
+.saveButton_cartModal,
+.deleteButton_cartModal{
     margin: 20px 5px 20px;
 }
 .display_element{
@@ -41,9 +40,25 @@
     margin: 0 20px;
     height: 100px
 }
+
 .Attchment{
     margin-top: 1.4%;
     margin-left: 20px;
     float: left;
 
 }
+
+.comments_block{
+    padding: 65px 20px 20px 20px;
+    text-align: left;
+}
+.new_comment{
+    width: -webkit-fill-available;
+    height: 25px;
+}
+.addComment_cartModal,
+.addAttachment_cartModal{
+    float: right;
+    margin: 10px 5px 20px 5px;
+}
+
