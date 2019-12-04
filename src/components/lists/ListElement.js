@@ -15,6 +15,7 @@ class ListElement extends Component {
         super(props);
         this.addCard = this.addCard.bind(this);
         this.fetchCards = this.fetchCards.bind(this);
+        this.refreshListElementComponent = this.refreshListElementComponent.bind(this);
     }
 
     componentDidMount() {
@@ -48,6 +49,11 @@ class ListElement extends Component {
         document.getElementById("new_cart_title_"+this.props.id).value = "";
     }
 
+    refreshListElementComponent(){
+        this.fetchCards();
+        this.setState({ state: this.state });
+    }
+
     render(){
         const { isLoading, cards } = this.state
         return (
@@ -57,7 +63,7 @@ class ListElement extends Component {
                     {!isLoading ? (
                         cards.map(card => {
                             const { title, id, listId, description } = card;
-                            return (<CardElement title={title} id={id} listId={listId} description={description} callback={this.fetchCards}/>);
+                            return (<CardElement title={title} id={id} listId={listId} description={description} callback={this.refreshListElementComponent}/>);
                         })
                     ) : (
                         <h3>Loading cards...</h3>

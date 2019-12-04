@@ -2,11 +2,15 @@ import React, { Component } from 'react';
 import {Modal, ModalHeader, ModalBody} from 'reactstrap';
 import '../../style/CardElement.css'
 import api from '../../networking/api';
+import CardComment from "./CardComment"
 
 class CardElement extends Component {
 
     state = {
-        showModal: false
+        showModal: false,
+        isLoading: true,
+        comments: [],
+        error: null
     }
 
     constructor(props) {
@@ -14,6 +18,14 @@ class CardElement extends Component {
         this.closeCartModal = this.closeCartModal.bind(this);
         this.showCardModal = this.showCardModal.bind(this);
         this.saveCard = this.saveCard.bind(this);
+        this.deleteCard = this.deleteCard.bind(this);
+        this.getComments = this.getComments.bind(this);
+        this.addComment = this.addComment.bind(this);
+        this.refreshCardElementComponent = this.refreshCardElementComponent.bind(this);
+    }
+
+    componentDidMount() {
+        this.getComments();
     }
 
     showCardModal(){
@@ -65,11 +77,56 @@ class CardElement extends Component {
             })
             .catch(error => {console.log("failed to update card's title")});
         }
-        this.hideEditLayout();
-        this.props.callback();
+        //this.hideEditLayout();
+        window.location.reload(false);
+    }
+
+    deleteCard(){
+        api.request({
+            url: `/cards/${this.props.id}`,
+            method: 'DELETE',
+            body: JSON.stringify({
+
+            })
+        })
+        .catch(error => {console.log("failed to delete card")});
+        window.location.reload(false);
+    }
+
+    getComments(){
+        api.request({
+            url: `/cards/${this.props.id}/comments`
+        })
+        .then(comments => {
+            this.setState({
+                comments: comments,
+                isLoading: false
+            })
+        })
+    }
+
+    addComment(){
+        var newCommentText = document.getElementById("new_comment_"+this.props.id).value;
+        api.request({
+            url: '/comments/create',
+            method: 'POST',
+            body: JSON.stringify({
+                cardId: this.props.id,
+                text: newCommentText,
+            })
+        })
+        .then(result => this.getComments())
+        .catch(error => {console.log("failed to add new comment")});
+        document.getElementById("new_comment_"+this.props.id).value = "";
+    }
+
+    refreshCardElementComponent(){
+        this.getComments();
+        this.setState({ state: this.state });
     }
 
     render(){
+        const { isLoading, comments } = this.state
         return (
             <div>
                 <div onClick={this.showCardModal} className="CardElement">
@@ -85,9 +142,28 @@ class CardElement extends Component {
                         <div className="cart_description display_element">{this.props.description}</div>
                     </ModalBody>
                     <div className="button_group">
+                        <button color="primary" onClick={this.deleteCard} className="deleteButton_cartModal">Delete</button>
                         <button color="primary" onClick={this.saveCard} className="saveButton_cartModal hide_element">Save</button>
                         <button color="primary" onClick={this.showEditLayout} className="editButton_cartModal display_element">Edit</button>
                         <button color="primary" onClick={this.closeCartModal} className="closeButton_cartModal">Close</button>
+                    </div>
+                    <div className="comments_block">
+                        {!isLoading ? (
+                            comments.map(comment => {
+                                const { id, text, cartId, userId, ownerName, ownedByUser } = comment;
+                                return (<CardComment id={id} text={text} cartId={cartId} userId={userId} ownerName={ownerName}
+                                    ownedByUser={ownedByUser} callback={this.refreshCardElementComponent}/>);
+                            })
+                        ) : (
+                            <h3>Loading comments...</h3>
+                        )}
+                        <div>
+                            <textarea id={"new_comment_"+this.props.id} className="new_comment display_element"/>
+                        </div>
+                        <div>
+                            <button color="primary" onClick={this.addComment} className="addComment_cartModal">Add comment</button>
+                            <button color="primary" className="addAttachment_cartModal">Add attachment</button>
+                        </div>
                     </div>
                 </Modal>
             </div>
