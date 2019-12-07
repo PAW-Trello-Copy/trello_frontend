@@ -39,7 +39,7 @@ class MainTableComponent extends Component {
     render() {
         const { isLoading, lists, error } = this.state
         return (
-            <div>
+            <div className="listClass">
                 <div className="title">
                     {this.tableTitle}
                 </div>

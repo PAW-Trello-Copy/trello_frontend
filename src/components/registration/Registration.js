@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import api from "../../networking/api";
 import '../../style/Registration.css';
-
+import { Button } from '@material-ui/core';
 class Registration extends Component {
     constructor(props) {
         super(props);
@@ -95,7 +95,8 @@ class Registration extends Component {
                 required
               />
     
-              <button type="submit">Sign up</button>
+              
+              <Button  variant="contained" color="secondary" type="submit" >Sign up</Button>
             </form>
             </fieldset>
           </div>

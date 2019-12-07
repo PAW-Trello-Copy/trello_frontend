@@ -28,10 +28,12 @@ class AddTable extends Component {
                     defaultValue={this.state.value}
                     ref="TableTitleInput"
                 />
-                <div >
+                <div className="forButton">
+                <div className="forButtonOk">
                     <Button  variant="contained" color="primary" className="forButton" onClick={this.addConfirmed}>Ok</Button>
+                    </div>
                     <Button  variant="contained" color="secondary" className="forButton" onClick={this.changeEditMode}>X</Button>
-                </div>
+                    </div>
             </div>);
     }
    

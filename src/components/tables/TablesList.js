@@ -1,6 +1,6 @@
 import TableInList from "./TableInList";
 import AddTable from "./AddTable"
-import { CircularProgress } from '@material-ui/core';
+import LinearProgress from '@material-ui/core/LinearProgress';
 import React, { Component } from "react";
 import api from "../../networking/api";
 import '../../style/TablesList.css'
@@ -32,7 +32,7 @@ class TablesList extends Component {
                 <TableInList title={title} id={id}  />);
             })
           ) : (
-              <CircularProgress color="secondary" />
+              <LinearProgress color="secondary" />
             )}
 
         

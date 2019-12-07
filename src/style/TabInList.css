@@ -1,10 +1,13 @@
 .TabInList{
-   background-color: #dfe3e6;
+   background-color: #ffffff;
    margin-left: 10px;
    margin-right: 10px;
    border-radius: 3px;
    text-align: center;
    width: 300px;
+}
+.TableListComponent{
+    margin-top: 1%;
 }
 .TabIcon{
     display: flex;

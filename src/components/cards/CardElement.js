@@ -151,7 +151,7 @@ class CardElement extends Component {
                 <Modal isOpen={this.state.showModal} className="CartModal">
                     <ModalHeader>
                         <textarea id="cart_title_input" className="hide_element" defaultValue={this.props.title}/>
-                        <div className="cart_title display_element">{this.props.title}</div>
+                        <div className="cart_title display_element"><h2>{this.props.title}</h2></div>
                     </ModalHeader>
                     <ModalBody>
                         <textarea id="cart_description_input" className="hide_element" defaultValue={this.props.description}/>

@@ -1,7 +1,7 @@
 import React from 'react';
 import clsx from 'clsx';
 import { makeStyles } from '@material-ui/core/styles';
-
+import '../../style/Appheader.css'
 import CssBaseline from '@material-ui/core/CssBaseline';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
@@ -65,7 +65,7 @@ const useStyles = makeStyles(theme => ({
 const AppHeader= ()=> {
   const classes = useStyles();
   
-  const [open] = React.useState(false);
+  
 
 
   return (
@@ -74,15 +74,13 @@ const AppHeader= ()=> {
       <AppBar       
       >
         <Toolbar>
-          
+          <div className="center">
           <h1>Trello</h1>
+          </div>
         </Toolbar>
       </AppBar>
      
-      <main
-        className={clsx(classes.content, {
-          [classes.contentShift]: open,
-        })}
+      <main      
       >
         <div className={classes.drawerHeader} />
       

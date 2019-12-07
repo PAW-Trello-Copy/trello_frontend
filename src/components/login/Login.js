@@ -3,7 +3,7 @@ import cookies from "browser-cookies";
 import api from "../../networking/api";
 import '../../style/Login.css';
 import { Redirect } from "react-router-dom";
-
+import { Button } from '@material-ui/core';
 
 class Login extends Component {
     constructor(props) {
@@ -91,7 +91,7 @@ class Login extends Component {
                 required
               />   
              
-              <button type="submit" >Login</button>
+              <Button  variant="contained" color="secondary" type="submit" >Login</Button>
             </form>
             </fieldset>
           </div>

@@ -45,9 +45,11 @@ class ButtonsArchiveTableList extends Component {
     render(){
         return(
              <div className="cart_title display_element archive_style">
-                   <h4 className="forH2">{this.props.title}</h4>
-                   <Icon onClick={this.removeToList} >redo</Icon>
-                    <Icon onClick={this.deleteTable} >delete</Icon> 
+                   <h2 >{this.props.title}</h2>
+                  
+                   <Icon onClick={this.removeToList} className="redo">redo</Icon>
+                    <Icon onClick={this.deleteTable} className="delete" >delete</Icon> 
+                    
             </div>
                                           
         );
