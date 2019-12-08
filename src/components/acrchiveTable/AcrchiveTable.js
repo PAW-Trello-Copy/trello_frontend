@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import '../../style/CardElement.css'
 import api from '../../networking/api';
 import Icon from '@material-ui/core/Icon';
+import IconButton from '@material-ui/core/IconButton';
 class AcrchiveTable extends Component {
 
     state = {
@@ -36,7 +37,9 @@ class AcrchiveTable extends Component {
 
     render(){
         return(
-            <Icon className="archIcon" color="primary" onClick={this.archiveTable}>archive</Icon>
+            <IconButton  aria-label="archive" color="primary">
+            <Icon  onClick={this.archiveTable}>archive</Icon>
+            </IconButton>
         );
     }
 }

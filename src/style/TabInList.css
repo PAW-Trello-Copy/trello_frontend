@@ -12,7 +12,8 @@
 .TabIcon{
     display: flex;
     flex-direction: row;
-    margin-left: 40%;
+    margin-left: 35%;
+    margin-bottom: 5px;
 }
 .archIcon{
     margin-left: 5px;

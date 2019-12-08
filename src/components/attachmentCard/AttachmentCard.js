@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import '../../style/CardElement.css'
 import api from '../../networking/api';
-
+import Button from '@material-ui/core/Button';
+import Input from '@material-ui/core/Input';
 class AttachmentCard extends Component {
 
     constructor(props) {
@@ -16,10 +17,7 @@ class AttachmentCard extends Component {
 
 
       onFormSubmit(e){
-        e.preventDefault() // Stop form submit
-        // this.fileUpload(this.state.file).then((response)=>{
-        //   console.log(response.data);
-        // })
+        e.preventDefault() // Stop form submit        
         this.fileUpload(this.state.file)
       }
       onChange(e) {
@@ -45,9 +43,10 @@ class AttachmentCard extends Component {
 
     render(){
         return(
-            <form onSubmit={this.onFormSubmit}>                
-                <input type="file" onChange={this.onChange} />
-                <button type="submit">Upload</button>
+            <form onSubmit={this.onFormSubmit}>                   
+                
+               <Input type="file" onChange={this.onChange}  /> 
+                <Button variant="contained" size="small" color="primary" type="submit">Upload</Button> 
              </form>
         );
     }

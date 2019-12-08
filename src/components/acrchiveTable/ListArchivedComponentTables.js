@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import api from "../../networking/api";
 import '../../style/AddTable.css';
 import ButtonsArchiveTableList from  '../acrchiveTable/ButtonsArchiveTableList'
-
+import CircularProgress from '@material-ui/core/CircularProgress';
 class ListArchivedComponentTables extends Component {
     state = {
         showModal: false,
@@ -40,7 +40,7 @@ class ListArchivedComponentTables extends Component {
                             return <ButtonsArchiveTableList title={title} id={id}/>
                         })
                         ) : (
-                            <h3>Loading cards...</h3>
+                            <CircularProgress  color="secondary" />
                         )}
                 
                 </div>

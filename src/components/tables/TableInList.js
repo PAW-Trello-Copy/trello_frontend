@@ -6,7 +6,7 @@ import api from "../../networking/api";
 import '../../style/TabInList.css';
 import Icon from '@material-ui/core/Icon';
 import AcrchiveTable from '../acrchiveTable/AcrchiveTable'
-
+import IconButton from '@material-ui/core/IconButton';
 class TableInList extends Component {
 
     constructor(props) {
@@ -99,7 +99,9 @@ class TableInList extends Component {
             <div  className="TabInList">
                 <h3 onClick={this.showBoard}>{this.state.title}</h3>
                 <div className="TabIcon">
-                <Icon color="primary" onClick={this.changeEditMode}>edit</Icon>
+                <IconButton  aria-label="edit" color="primary">
+                <Icon  onClick={this.changeEditMode}>edit</Icon>
+                </IconButton>
                 <AcrchiveTable title={this.props.title} id={this.props.id} fetchTables={this.fetchTables}/> 
                 </div>         
             </div>

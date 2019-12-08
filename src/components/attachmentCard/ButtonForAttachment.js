@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import '../../style/CardElement.css'
 import api from '../../networking/api';
 import Icon from '@material-ui/core/Icon';
+import IconButton from '@material-ui/core/IconButton';
 class ButtonForAttachment extends Component {
 
     state = {
@@ -49,9 +50,11 @@ class ButtonForAttachment extends Component {
 
     render(){
         return(
-             <div className="cart_title display_element ">
-                   <img src={this.state.imgUrl} alt={this.props.title} width="200" height="100" />                
-                    <Icon onClick={this.deleteFile} >delete</Icon> 
+             <div className="cart_title display_element1 ">
+                   <img src={this.state.imgUrl} alt={this.props.title} width="200" height="100" />  
+                   <IconButton onClick={this.deleteFile}  aria-label="edit" color="secondary" >             
+                    <Icon >delete</Icon> 
+                    </IconButton> 
             </div>
                                           
         );

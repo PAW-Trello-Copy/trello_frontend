@@ -1,8 +1,10 @@
 import React, { Component } from 'react';
 import ListElement from "../lists/ListElement"
 import api from '../../networking/api';
-import '../../style/MainTableComponent.css'
-
+import '../../style/MainTableComponent.css';
+import CircularProgress from '@material-ui/core/CircularProgress';
+import IconButton from '@material-ui/core/IconButton';
+import Icon from '@material-ui/core/Icon';
 
 class MainTableComponent extends Component {
 
@@ -51,15 +53,19 @@ class MainTableComponent extends Component {
                             return (<ListElement title={title} id={id} />);
                         })
                     ) : (
-                        <h3>Loading lists...</h3>
+                        <CircularProgress  color="secondary" />
                     )}
                     <div className="ContainerList">
                         <input type="text"
                                id="new_list_name"
                                required="required"
+                               placeholder="Create new List"
                                value={this.state.body}
                                className="form-control"/>
-                        <button onClick={this.addNewList}> Add new list </button>
+                        {/* <button onClick={this.addNewList}> Add new list </button> */}
+                        <IconButton  aria-label="edit" color="primary">
+                         <Icon color="primary" onClick={this.addNewList}>add</Icon>
+                        </IconButton>
                     </div>
                 </div>
              </div>

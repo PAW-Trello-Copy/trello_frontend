@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import '../../style/ArciveCard.css';
 import api from '../../networking/api';
 import ButtonsForArchiveList from '../archivecard/ButtonsForArchiveList';
-
+import CircularProgress from '@material-ui/core/CircularProgress';
 class ListArchived extends Component {
 
     state = {
@@ -43,7 +43,7 @@ class ListArchived extends Component {
                             return <ButtonsForArchiveList title={title} id={id}/>
                         })
                         ) : (
-                            <h3>Loading cards...</h3>
+                            <CircularProgress  color="secondary" />
                         )}
                 </div>);
             }

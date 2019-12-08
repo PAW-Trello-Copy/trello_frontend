@@ -3,8 +3,9 @@ import api from '../../networking/api';
 import CardElement from "../cards/CardElement";
 import ArchiveCard from"../archivecard/ArchiveCard";
 import '../../style/ListElement.css';
-
-
+import IconButton from '@material-ui/core/IconButton';
+import Icon from '@material-ui/core/Icon';
+import CircularProgress from '@material-ui/core/CircularProgress';
 
 class ListElement extends Component {
 
@@ -82,8 +83,10 @@ class ListElement extends Component {
             <div className="ListElement">
                 <div className="titleList">
                 <h3 className="titleName">{this.props.title}</h3>
-                <div className="buttonArch"  >              
+                <div className="buttonArch"  >   
+                      
                 <ArchiveCard title={this.props.title} id={this.props.id} listId={this.props.listId}   />
+               
                 </div>
                 </div>
                 <div>
@@ -93,11 +96,18 @@ class ListElement extends Component {
                             return (<CardElement title={title} id={id} listId={listId} description={description} callback={this.refreshListElementComponent}/>);
                         })
                     ) : (
-                        <h3>Loading cards...</h3>
+                        <CircularProgress  color="secondary" />
                     )}
                 </div>                
-                <input id={"new_cart_title_"+this.props.id} className="new_cart_title"/>
-                <button className="button_addCard" onClick={this.addCard}>Add card</button>
+                <input id={"new_cart_title_"+this.props.id} placeholder="Create new Card" className="new_cart_title"/>
+
+               
+                   
+                <IconButton  aria-label="edit" color="primary">
+                         <Icon color="primary" onClick={this.addCard}>add</Icon>
+                </IconButton>
+                
+                
             </div>
            
         );

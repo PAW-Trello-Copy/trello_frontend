@@ -5,8 +5,10 @@ import api from '../../networking/api';
 import AttachmentCard from '../attachmentCard/AttachmentCard'
 import ShowAttchment from '../attachmentCard/ShowAttchment'
 import CardComment from "./CardComment"
-
-
+import CircularProgress from '@material-ui/core/CircularProgress';
+import Icon from '@material-ui/core/Icon';
+import Fab from "@material-ui/core/Fab";
+import Button from '@material-ui/core/Button';
 class CardElement extends Component {
 
     state = {
@@ -148,10 +150,16 @@ class CardElement extends Component {
                     <h3>{this.props.title}</h3>
                     
                 </div>
+                <div className="CartModal1">
                 <Modal isOpen={this.state.showModal} className="CartModal">
                     <ModalHeader>
                         <textarea id="cart_title_input" className="hide_element" defaultValue={this.props.title}/>
                         <div className="cart_title display_element"><h2>{this.props.title}</h2></div>
+                        <div className="buttonClose">
+                         <Fab color="secondary" onClick={this.closeCartModal}>
+                            <Icon  >close</Icon>
+                         </Fab></div>
+                       
                     </ModalHeader>
                     <ModalBody>
                         <textarea id="cart_description_input" className="hide_element" defaultValue={this.props.description}/>
@@ -163,11 +171,20 @@ class CardElement extends Component {
                     <AttachmentCard title={this.props.title} id={this.props.id}/>
                     </div>         
                     <div className="button_group">
-                        <button color="primary" onClick={this.deleteCard} className="deleteButton_cartModal">Delete</button>
-                        <button color="primary" onClick={this.saveCard} className="saveButton_cartModal hide_element">Save</button>
-                        <button color="primary" onClick={this.archiveCard} className="editButton_cartModal display_element">Archive</button>
-                        <button color="primary" onClick={this.showEditLayout} className="editButton_cartModal display_element">Edit</button>
-                        <button color="primary" onClick={this.closeCartModal} className="closeButton_cartModal">Close</button>
+                        <div className="saveButton_cartModal hide_element">
+                             <Button variant="contained" size="small" color="secondary"onClick={this.saveCard} >Save</Button>
+                        </div>
+                         <div className="deleteButton_cartModal"> 
+                         <Button variant="contained" size="small" color="primary"onClick={this.deleteCard} >Delete</Button>
+                         </div>                         
+                         <div className="editButton_cartModal ">
+                         <Button variant="contained" size="small" color="primary"onClick={this.archiveCard} >Archive</Button>
+                         </div>
+                         <div className="editButton_cartModal display_element"> 
+                         <Button variant="contained" size="small" color="primary"onClick={this.showEditLayout} >Edit</Button>
+                         </div>
+
+                       
                     </div>
                     <div className="comments_block">
                         {!isLoading ? (
@@ -177,17 +194,22 @@ class CardElement extends Component {
                                     ownedByUser={ownedByUser} callback={this.refreshCardElementComponent}/>);
                             })
                         ) : (
-                            <h3>Loading comments...</h3>
+                            <CircularProgress  color="secondary" />
                         )}
                         <div>
                             <textarea id={"new_comment_"+this.props.id} className="new_comment display_element"/>
                         </div>
                         <div>
-                            <button color="primary" onClick={this.addComment} className="addComment_cartModal">Add comment</button>
-                            <button color="primary" className="addAttachment_cartModal">Add attachment</button>
+                        <div className="addComment_cartModal"> 
+                        <Button variant="contained" size="small" color="primary"onClick={this.addComment}>Add comment</Button>
+                        </div>
+                        <div className="addAttachment_cartModal"> 
+                        <Button variant="contained" size="small" color="primary">Add attachment</Button>
+                        </div>
                         </div>
                     </div>
                 </Modal>
+                </div>
             </div>
         );
     }

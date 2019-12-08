@@ -16,6 +16,8 @@
     
 }
 .button_group{
+    display: flex;
+    flex-direction: row;
     float: right;
 }
 .closeButton_cartModal{
@@ -29,6 +31,10 @@
 }
 .display_element{
     display: inline-block;
+}
+.display_element1{
+    display: inline-block;
+    margin-top: 5px;
 }
 .hide_element{
     display: none;
@@ -44,7 +50,7 @@
     height: 100px
 }
 .archive_style{
-    background-color: rgb(133, 123, 123);
+    background-color: rgb(177, 175, 175);
     border-radius: 10px;
     color: white;
      margin-left: 1%; 

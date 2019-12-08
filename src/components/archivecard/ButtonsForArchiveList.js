@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import '../../style/ArciveCard.css'
 import Icon from '@material-ui/core/Icon';
 import api from '../../networking/api';
+import IconButton from '@material-ui/core/IconButton';
+
 
 class ButtonsForArchiveList extends Component {
 
@@ -47,8 +49,12 @@ class ButtonsForArchiveList extends Component {
 
              <div className="cart_title display_element archive_style">
                    <h2 className="forH2">{this.props.title}</h2>
+                   <IconButton  aria-label="return" color="primary">
                    <Icon onClick={this.removeToList} >redo</Icon>
+                   </IconButton>
+                   <IconButton aria-label="delete" color="secondary">
                     <Icon onClick={this.deleteCard} >delete</Icon> 
+                    </IconButton>
             </div>
                                           
         );

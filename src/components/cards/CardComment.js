@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import '../../style/CardComment.css'
 import api from '../../networking/api';
-
+import Button from '@material-ui/core/Button';
 class CardComment extends Component {
 
     constructor(props) {
@@ -50,10 +50,13 @@ class CardComment extends Component {
                 <div id={"comment_owner_"+this.props.id} className="comment_owner">{this.props.ownerName}</div>
                 <div id={"comment_text_"+this.props.id} className="comment_text display_element">{this.props.text}</div>
                 <textarea id={"comment_text_edit_"+this.props.id} className="comment_text_edit hide_element" defaultValue={this.props.text}/>
-                <button color="primary" onClick={this.showEditLayout} id={"edit_comment_"+this.props.id}
-                    className="edit_comment hide_element">Edit comment</button>
-                <button color="primary" onClick={this.editComment} id={"save_comment_"+this.props.id}
-                    className="edit_comment hide_element">Save comment</button>
+                
+                <div className="edit_comment hide_element" id={"edit_comment_"+this.props.id}>
+                    <Button variant="contained" size="small" color="primary" onClick={this.showEditLayout} >Edit comment</Button> 
+                </div>
+                <div className="edit_comment hide_element" id={"save_comment_"+this.props.id}>
+                    <Button variant="contained" size="small" onClick={this.editComment} color="secondary">Save comment</Button> 
+                </div>
             </div>
         );
     }
