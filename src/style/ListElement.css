@@ -4,6 +4,7 @@
     border-radius: 3px;
     text-align: center;
     width: 300px;
+    height: -webkit-fill-available;
 }
 .button_addCard{
     margin: 5px 5px 10px 5px;

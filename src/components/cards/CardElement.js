@@ -29,19 +29,32 @@ class CardElement extends Component {
         this.getComments = this.getComments.bind(this);
         this.addComment = this.addComment.bind(this);
         this.refreshCardElementComponent = this.refreshCardElementComponent.bind(this);
+        this.showLinkToCard = this.showLinkToCard.bind(this);
     }
 
     componentDidMount() {
         this.getComments();
         this.archiveCard = this.archiveCard.bind(this);
+        var urlParams = new URLSearchParams(window.location.search);
+        if(urlParams.get('card') === this.props.id+''){
+            this.showCardModal();
+        }
     }
 
     showCardModal(){
+        if(!window.location.href.includes('card')){
+            var newurl = window.location.protocol + "//" + window.location.host + window.location.pathname + '?card=' + this.props.id;
+            window.history.pushState({path:newurl},'',newurl);
+        }
         this.setState({showModal: true});
     }
 
 
     closeCartModal(){
+        if(window.location.href.includes('card')){
+            var newurl = window.location.protocol + "//" + window.location.host + window.location.pathname;
+            window.history.pushState({path:newurl},'',newurl);
+        }
         this.setState({showModal: false});
     }
 
@@ -61,6 +74,14 @@ class CardElement extends Component {
         document.getElementsByClassName("cart_title")[0].classList.replace("hide_element","display_element");
         document.getElementById("cart_description_input").classList.replace("display_element","hide_element");
         document.getElementsByClassName("cart_description")[0].classList.replace("hide_element","display_element");
+    }
+
+    showLinkToCard(){
+        document.getElementsByClassName("linkToCard")[0].classList.replace("hide_element","display_element");
+    }
+
+    hideLinkToCard(){
+        document.getElementsByClassName("linkToCard")[0].classList.replace("display_element","hide_element");
     }
 
     saveCard(){
@@ -86,6 +107,10 @@ class CardElement extends Component {
     }
 
     deleteCard(){
+        if(window.location.href.includes('card')){
+            var newurl = window.location.protocol + "//" + window.location.host + window.location.pathname;
+            window.history.pushState({path:newurl},'',newurl);
+        }
         api.request({
             url: `/cards/${this.props.id}`,
             method: 'DELETE',
@@ -157,7 +182,7 @@ class CardElement extends Component {
                         <div className="cart_title display_element"><h2>{this.props.title}</h2></div>
                         <div className="buttonClose">
                          <Fab color="secondary" onClick={this.closeCartModal}>
-                            <Icon  >close</Icon>
+                            <Icon >close</Icon>
                          </Fab></div>
                        
                     </ModalHeader>
@@ -170,21 +195,26 @@ class CardElement extends Component {
                     <div className="Attchment">
                     <AttachmentCard title={this.props.title} id={this.props.id}/>
                     </div>         
-                    <div className="button_group">
-                        <div className="saveButton_cartModal hide_element">
-                             <Button variant="contained" size="small" color="secondary"onClick={this.saveCard} >Save</Button>
-                        </div>
-                         <div className="deleteButton_cartModal"> 
-                         <Button variant="contained" size="small" color="primary"onClick={this.deleteCard} >Delete</Button>
-                         </div>                         
-                         <div className="editButton_cartModal ">
-                         <Button variant="contained" size="small" color="primary"onClick={this.archiveCard} >Archive</Button>
-                         </div>
-                         <div className="editButton_cartModal display_element"> 
-                         <Button variant="contained" size="small" color="primary"onClick={this.showEditLayout} >Edit</Button>
-                         </div>
-
-                       
+                    <div className="button_group_cust">
+                        <span className="saveButton_cartModal hide_element">
+                            <Button variant="contained" className="saveButton_cartModal hide_element" size="small" color="secondary" onClick={this.saveCard} >Save</Button>
+                        </span>
+                        <span className="deleteButton_cartModal">
+                            <Button variant="contained" className="deleteButton_cartModal" size="small" color="primary" onClick={this.deleteCard}>Delete</Button>
+                        </span>
+                        <span className="editButton_cartModal">
+                            <Button variant="contained" className="editButton_cartModal" size="small" color="primary" onClick={this.archiveCard}>Archive</Button>
+                        </span>
+                        <span className="editButton_cartModal display_element">
+                            <Button variant="contained" className="editButton_cartModal display_element" size="small" color="primary" onClick={this.showEditLayout}>Edit</Button>
+                        </span>
+                        <span className="shareButton_cartModal">
+                            <Button variant="contained" className="shareButton_cartModal" size="small" color="primary" onClick={this.showLinkToCard}>Share</Button>
+                        </span>
+                    </div>
+                    <div className="linkToCard hide_element">
+                        <input className="linkToCard_input" defaultValue={window.location.href}></input>
+                        <Icon className="linkToCard_closeButton" onClick={this.hideLinkToCard}>close</Icon>
                     </div>
                     <div className="comments_block">
                         {!isLoading ? (

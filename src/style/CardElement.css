@@ -13,15 +13,18 @@
     text-align: center;
     margin-top: 20px;
 }
-.button_group{
-    float: right;
+.button_group_cust{
+    width: -webkit-fill-available;
+    display: inline-block;
+    text-align: right;
 }
 .closeButton_cartModal{
     margin: 20px 20px 20px 5px;
 }
 .editButton_cartModal,
 .saveButton_cartModal,
-.deleteButton_cartModal{
+.deleteButton_cartModal,
+.shareButton_cartModal{
     margin: 20px 5px 20px;
 }
 .display_element{
@@ -49,7 +52,7 @@
 }
 
 .comments_block{
-    padding: 65px 20px 20px 20px;
+    padding: 20px 20px 20px 20px;
     text-align: left;
 }
 .new_comment{
@@ -60,5 +63,15 @@
 .addAttachment_cartModal{
     float: right;
     margin: 10px 5px 20px 5px;
+}
+.linkToCard{
+    float: right;
+    margin: 0 20px 20px;
+    width: -webkit-fill-available;
+    text-align: right;
+}
+.linkToCard_input{
+    vertical-align: super;
+    width: 75%;
 }
 
