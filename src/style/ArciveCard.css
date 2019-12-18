@@ -33,9 +33,15 @@
     display: inline-block;
 }
 .display_element1{
-    display: inline-block;
+    display: inline-block;    
+    
+    margin-left: 5px;
     margin-top: 5px;
 }
+.ForLink{
+    margin-left: 6px;
+}
+
 .hide_element{
     display: none;
 }

@@ -22,6 +22,8 @@ class CardElement extends Component {
         allAvaliableLabels: [],
         error: null,
         pickedColor: "#FFFFFF"
+        displayHistory: false
+
     }
 
     constructor(props) {
@@ -142,10 +144,8 @@ class CardElement extends Component {
         }
         api.request({
             url: `/cards/${this.props.id}`,
-            method: 'DELETE',
-            body: JSON.stringify({
-
-            })
+            method: 'DELETE'
+           
         })
         .then(result => window.location.reload(false))
         .catch(error => {console.log("failed to delete card")});
@@ -220,6 +220,13 @@ class CardElement extends Component {
         .catch(error => {console.log("failed to update card's archive")});
        
        this.props.callback();
+    }
+
+    displayQuestion = () => {
+        this.setState({
+            displayHistory: !this.state.displayHistory
+    }) 
+    
     }
 
     addNewLabel(){
@@ -319,8 +326,21 @@ class CardElement extends Component {
                     <ModalBody>
                         <textarea id="cart_description_input" className="hide_element" defaultValue={this.props.description}/>
                         <div className="cart_description display_element">{this.props.description}</div>
-                        <ShowAttchment title={this.props.title} id={this.props.id}/>
+                        <h4 className="textAttach">Attachments:</h4>
+                        <div className="textAttach">
+                        <ShowAttchment  title={this.props.title} id={this.props.id}/>
+                       
+                        </div>
+                       
+                      
                     </ModalBody>
+                    
+                         
+                    <div className="button_group">
+                        <div className="saveButton_cartModal hide_element">
+                             <Button variant="contained" size="small" color="secondary"onClick={this.saveCard} >Save</Button>
+                        </div>
+                         <div className="deleteButton_cartModal"> 
 
                     <div className="Attchment">
                     <AttachmentCard title={this.props.title} id={this.props.id}/>
@@ -344,17 +364,38 @@ class CardElement extends Component {
                         <span className="shareButton_cartModal">
                             <Button variant="contained" className="labelButton_cartModal" size="small" color="primary" onClick={this.showLabelModal}>Labels</Button>
                         </span>
+                        
+                         <Button variant="contained" size="small" color="primary"onClick={this.displayQuestion} >History</Button>
+                         </div>                         
+                         <div className="editButton_cartModal ">
+                         <Button variant="contained" size="small" color="primary"onClick={this.archiveCard} >Archive</Button>
+                         </div>
+                         <div className="editButton_cartModal display_element"> 
+                         <Button variant="contained" size="small" color="primary"onClick={this.showEditLayout} >Edit</Button>
+                         </div>
+
+                       
                     </div>
-                    <div className="linkToCard hide_element">
-                        <input className="linkToCard_input" defaultValue={window.location.href}></input>
-                        <Icon className="linkToCard_closeButton" onClick={this.hideLinkToCard}>close</Icon>
+                    <div className="button_group">
+                    <div className="Attchment1 "> 
+                             <AttachmentCard title={this.props.title} id={this.props.id}/>
+                         </div>
                     </div>
                     <div className="comments_block">
                         {!isLoading ? (
-                            comments.map(comment => {
-                                const { id, text, cartId, userId, ownerName, ownedByUser } = comment;
-                                return (<CardComment id={id} text={text} cartId={cartId} userId={userId} ownerName={ownerName}
-                                    ownedByUser={ownedByUser} callback={this.refreshCardElementComponent}/>);
+                            comments
+                            .filter(comment => {
+                            
+                                if (this.state.displayHistory) {
+                                    return true;
+                                }
+                                return !comment.history;
+                            })
+                            .map(comment => {
+                                const { id, text, cartId, userId,timestamp, ownerName, ownedByUser, history } = comment;
+                               
+                                return (<CardComment key={id} id={id} isHistory={history} timestamp={timestamp} text={text} cartId={cartId} userId={userId} ownerName={ownerName}
+                                    ownedByUser={ownedByUser}/>);
                             })
                         ) : (
                             <CircularProgress  color="secondary" />
@@ -366,9 +407,9 @@ class CardElement extends Component {
                         <div className="addComment_cartModal"> 
                         <Button variant="contained" size="small" color="primary"onClick={this.addComment}>Add comment</Button>
                         </div>
-                        <div className="addAttachment_cartModal"> 
-                        <Button variant="contained" size="small" color="primary">Add attachment</Button>
-                        </div>
+                        {/* <div className="Attchment1"> 
+                        <AttachmentCard title={this.props.title} id={this.props.id}/>
+                        </div> */}
                         </div>
                     </div>
                     <Modal isOpen={this.state.labelModal} className="LabelsModal">

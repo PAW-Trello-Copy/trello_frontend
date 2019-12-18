@@ -11,7 +11,7 @@ class CardComment extends Component {
     }
 
     componentDidMount() {
-        if(this.props.ownedByUser) {
+        if(this.props.ownedByUser && !this.props.isHistory) {
             document.getElementById("edit_comment_"+this.props.id).classList.replace("hide_element", "display_element");
         }
     }
@@ -38,25 +38,40 @@ class CardComment extends Component {
             body: JSON.stringify({
                 text: newCommentText
             })
+            
         })
         .then(result => window.location.reload(false))
         .catch(error => {console.log("failed to update comment")});
     }
 
     render(){
+     
         return (
             <div className="comment_item">
-                <div id={"comment_owner_"+this.props.id} className="comment_owner">{this.props.ownerName}</div>
+            
+    <div id={"comment_owner_"+this.props.id} className="comment_owner">
+   
+        <p>{this.props.ownerName}</p>
+            
+            <p className="paragraf" >{this.props.timestamp}
+            </p>
+            {this.props.isHistory &&
+               
+               <p className="backforHistory"> histroty </p> 
+            
+        }
+    </div>
                 <div id={"comment_text_"+this.props.id} className="comment_text display_element">{this.props.text}</div>
                 <textarea id={"comment_text_edit_"+this.props.id} className="comment_text_edit hide_element" defaultValue={this.props.text}/>
                 
-                <div className="edit_comment hide_element" id={"edit_comment_"+this.props.id}>
+                
+                <div className="edit_comment hide_element " id={"edit_comment_"+this.props.id}>
                     <Button variant="contained" size="small" color="primary" onClick={this.showEditLayout} >Edit comment</Button> 
                 </div>
-                <div className="edit_comment hide_element" id={"save_comment_"+this.props.id}>
+                <div className="save_comment hide_element" id={"save_comment_"+this.props.id}>
                     <Button variant="contained" size="small" onClick={this.editComment} color="secondary">Save comment</Button> 
                 </div>
-            </div>
+    </div>
         );
     }
 }
