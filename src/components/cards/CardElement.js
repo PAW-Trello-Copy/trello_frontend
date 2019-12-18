@@ -21,7 +21,7 @@ class CardElement extends Component {
         labels: [],
         allAvaliableLabels: [],
         error: null,
-        pickedColor: "#FFFFFF"
+        pickedColor: "#FFFFFF",
         displayHistory: false
 
     }
@@ -337,50 +337,31 @@ class CardElement extends Component {
                     <p></p>
                     
                     
-                    <div className="button_group_cust">
                     <div className="Attchment1 "> 
                              <AttachmentCard title={this.props.title} id={this.props.id}/>
                          </div>  
                         <span className="saveButton_cartModal hide_element">
                              <Button variant="contained" size="small" color="secondary"onClick={this.saveCard} >Save</Button>
-                        </span>
-                         <span className="deleteButton_cartModal"> 
-
-                    <div className="Attchment">
-                    <AttachmentCard title={this.props.title} id={this.props.id}/>
-                    </div>         
+                        </span>       
                     <div className="button_group_cust">
                         <span className="saveButton_cartModal hide_element">
                             <Button variant="contained" className="saveButton_cartModal hide_element" size="small" color="secondary" onClick={this.saveCard} >Save</Button>
                         </span>
-                        <span className="eeButton_cartModal">
-                            <Button variant="contained" className="deleteButton_cartModal" size="small" color="primary" onClick={this.deleteCard}>Delete</Button>
-                        </span>
+                        <span className="editButton_cartModal">
+                         <Button variant="contained" size="small" color="primary"onClick={this.displayQuestion} >History</Button>
+                         </span>  
                         <span className="editButton_cartModal">
                             <Button variant="contained" className="editButton_cartModal" size="small" color="primary" onClick={this.archiveCard}>Archive</Button>
                         </span>
                         <span className="editButton_cartModal display_element">
                             <Button variant="contained" className="editButton_cartModal display_element" size="small" color="primary" onClick={this.showEditLayout}>Edit</Button>
                         </span>
-                        <span className="shareButton_cartModal">
+                        <span className="editButton_cartModal">
                             <Button variant="contained" className="shareButton_cartModal" size="small" color="primary" onClick={this.showLinkToCard}>Share</Button>
                         </span>
-                        <span className="shareButton_cartModal">
+                        <span className="editButton_cartModal">
                             <Button variant="contained" className="labelButton_cartModal" size="small" color="primary" onClick={this.showLabelModal}>Labels</Button>
-                        </span>
-                        
-                         <Button variant="contained" size="small" color="primary"onClick={this.displayQuestion} >History</Button>
-                         </span>                         
-                         <span className="editButton_cartModal ">
-                         <Button variant="contained" size="small" color="primary"onClick={this.archiveCard} >Archive</Button>
-                         </span>
-                         <span className="editButton_cartModal display_element"> 
-                         <Button variant="contained" size="small" color="primary"onClick={this.showEditLayout} >Edit</Button>
-                         </span>
-                         <span className="shareButton_cartModal">
-                            <Button variant="contained" className="shareButton_cartModal" size="small" color="primary" onClick={this.showLinkToCard}>Share</Button>
-                        </span>
-
+                        </span>                       
                         <span className="linkToCard hide_element">
                         <input className="linkToCard_input" defaultValue={window.location.href}></input>
                         <Icon className="linkToCard_closeButton" onClick={this.hideLinkToCard}>close</Icon>
