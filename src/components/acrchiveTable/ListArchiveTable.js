@@ -41,7 +41,7 @@ class ListArchiveTable extends Component {
             </div> 
             <div className="CartModal1">
                 <Modal isOpen={this.state.showModal}  className="CartModal">
-                 <h4>Card Archived</h4>
+                 <h4>Tables Archived</h4>
                  <div className="buttonClose">
                 <Fab color="secondary" onClick={this.closeTableModal}>
                 <Icon  >close</Icon>

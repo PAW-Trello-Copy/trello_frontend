@@ -337,6 +337,9 @@ class CardElement extends Component {
                     
                          
                     <div className="button_group">
+                    <div className="Attchment1 "> 
+                             <AttachmentCard title={this.props.title} id={this.props.id}/>
+                         </div>
                         <div className="saveButton_cartModal hide_element">
                              <Button variant="contained" size="small" color="secondary"onClick={this.saveCard} >Save</Button>
                         </div>
@@ -373,14 +376,8 @@ class CardElement extends Component {
                          <div className="editButton_cartModal display_element"> 
                          <Button variant="contained" size="small" color="primary"onClick={this.showEditLayout} >Edit</Button>
                          </div>
+                    </div>
 
-                       
-                    </div>
-                    <div className="button_group">
-                    <div className="Attchment1 "> 
-                             <AttachmentCard title={this.props.title} id={this.props.id}/>
-                         </div>
-                    </div>
                     <div className="comments_block">
                         {!isLoading ? (
                             comments
