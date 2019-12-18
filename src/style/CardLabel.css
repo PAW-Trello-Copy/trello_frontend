@@ -1,0 +1,9 @@
+.label_field{
+    width: 75%;
+    text-align: center;
+}
+.label_field_component{
+    display: flex;
+    margin: 10px;
+    border-radius: 5px;
+}

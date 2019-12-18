@@ -39,9 +39,8 @@ class CardComment extends Component {
                 text: newCommentText
             })
         })
+        .then(result => window.location.reload(false))
         .catch(error => {console.log("failed to update comment")});
-        //this.props.callback();
-        window.location.reload(false);
     }
 
     render(){
