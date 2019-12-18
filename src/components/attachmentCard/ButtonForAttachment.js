@@ -16,7 +16,7 @@ class ButtonForAttachment extends Component {
         super(props);      
        
         this.deleteFile = this.deleteFile.bind(this)
-       
+        this.getFile = this.getFile.bind(this);
       }
       componentDidMount() {
         this.showAttachment();
@@ -48,10 +48,23 @@ class ButtonForAttachment extends Component {
         .catch(error => {console.log("failed to update card's ")});
     }
 
+    getFile(){
+        api.request({
+            url: `/attachments/file/${this.props.id}`          
+           
+                      
+            
+        })
+        .catch(error => {console.log("failed to download file")});
+    }
+
     render(){
+       
+        
+        const download = this.props.filename
         return(
-             <div className="cart_title display_element1 ">
-                   <img src={this.state.imgUrl} alt={this.props.title} width="200" height="100" />  
+             <div className="cart_title display_element1 ">                  
+                   <a className="ForLink"href={this.state.imgUrl} download={download}>{this.props.filename}</a> 
                    <IconButton onClick={this.deleteFile}  aria-label="edit" color="secondary" >             
                     <Icon >delete</Icon> 
                     </IconButton> 

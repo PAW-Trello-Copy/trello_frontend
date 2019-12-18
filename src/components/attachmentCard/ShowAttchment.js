@@ -1,7 +1,9 @@
 import React, { Component } from 'react';
 import '../../style/CardElement.css'
 import api from '../../networking/api';
-import ButtonForAttachment from '../attachmentCard/ButtonForAttachment'
+import ButtonForAttachment from '../attachmentCard/ButtonForAttachment';
+import CircularProgress from '@material-ui/core/CircularProgress';
+
 class ShowAttchment extends Component {
 
     state = {
@@ -46,7 +48,7 @@ class ShowAttchment extends Component {
                             return <ButtonForAttachment filename={filename} id={id}/>
                         })
                         ) : (
-                            <h3>Loading files...</h3>
+                            <CircularProgress  color="secondary" />
                         )}
                 </div>);
             }
