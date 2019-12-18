@@ -334,16 +334,17 @@ class CardElement extends Component {
                        
                       
                     </ModalBody>
+                    <p></p>
                     
-                         
-                    <div className="button_group">
+                    
+                    <div className="button_group_cust">
                     <div className="Attchment1 "> 
                              <AttachmentCard title={this.props.title} id={this.props.id}/>
-                         </div>
-                        <div className="saveButton_cartModal hide_element">
+                         </div>  
+                        <span className="saveButton_cartModal hide_element">
                              <Button variant="contained" size="small" color="secondary"onClick={this.saveCard} >Save</Button>
-                        </div>
-                         <div className="deleteButton_cartModal"> 
+                        </span>
+                         <span className="deleteButton_cartModal"> 
 
                     <div className="Attchment">
                     <AttachmentCard title={this.props.title} id={this.props.id}/>
@@ -369,15 +370,23 @@ class CardElement extends Component {
                         </span>
                         
                          <Button variant="contained" size="small" color="primary"onClick={this.displayQuestion} >History</Button>
-                         </div>                         
-                         <div className="editButton_cartModal ">
+                         </span>                         
+                         <span className="editButton_cartModal ">
                          <Button variant="contained" size="small" color="primary"onClick={this.archiveCard} >Archive</Button>
-                         </div>
-                         <div className="editButton_cartModal display_element"> 
+                         </span>
+                         <span className="editButton_cartModal display_element"> 
                          <Button variant="contained" size="small" color="primary"onClick={this.showEditLayout} >Edit</Button>
-                         </div>
-                    </div>
+                         </span>
+                         <span className="shareButton_cartModal">
+                            <Button variant="contained" className="shareButton_cartModal" size="small" color="primary" onClick={this.showLinkToCard}>Share</Button>
+                        </span>
 
+                        <span className="linkToCard hide_element">
+                        <input className="linkToCard_input" defaultValue={window.location.href}></input>
+                        <Icon className="linkToCard_closeButton" onClick={this.hideLinkToCard}>close</Icon>
+                        </span>
+                    </div>
+                   
                     <div className="comments_block">
                         {!isLoading ? (
                             comments
