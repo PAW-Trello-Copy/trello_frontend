@@ -142,3 +142,12 @@
     width: -webkit-fill-available;
     margin: 10px 0;
 }
+.labels_section_on_cart_tile{
+    margin: 0 30px;
+}
+.label_item_on_cart_tile{
+    font-size: 11px;
+    margin-top: 5px;
+    font-weight: bold;
+    border-radius: 5px;
+}

@@ -300,8 +300,17 @@ class CardElement extends Component {
         return (
             <div>
                 <div onClick={this.showCardModal} className="CardElement">
+                    <div className="labels_section_on_cart_tile">
+                       {!isLoading ? (
+                           labels.map(label => {
+                               const { title, color } = label;
+                               return (<div style={{backgroundColor: "#"+color}} className="label_item_on_cart_tile">{title}</div>);
+                           })
+                       ) : (
+                           <CircularProgress  color="secondary" />
+                       )}
+                    </div>
                     <h3>{this.props.title}</h3>
-                    
                 </div>
                 <div className="CartModal1">
                 <Modal isOpen={this.state.showModal} className="CartModal">
