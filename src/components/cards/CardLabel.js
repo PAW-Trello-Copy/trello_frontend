@@ -70,7 +70,6 @@ class CardLabel extends Component {
     }
 
     render(){
-        const { isLoading } = this.state
         return (
             <div className='label_field_component' style={{backgroundColor: "#"+this.props.color}}>
                 <div className="label_field">{this.props.title}</div>

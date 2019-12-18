@@ -302,7 +302,7 @@ class CardElement extends Component {
                         <div className="labels_section">
                            {!isLoading ? (
                                labels.map(label => {
-                                   const { id, title, color, tableId } = label;
+                                   const { title, color } = label;
                                    return (<div style={{backgroundColor: "#"+color}} className="label_item">{title}</div>);
                                })
                            ) : (
